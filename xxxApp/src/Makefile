@@ -39,11 +39,9 @@ DBD_SUFFIX_WIN32 = Win$(if $(findstring 32, $(T_A)),32,64)
 DBD_NAME = $(DBD_PREFIX)$(DBD_SUFFIX_$(OS_CLASS))
 
 DBD  += $(DBD_NAME).dbd
+$(DBD_NAME)_DBD += base.dbd
 
-ifndef ADCORE
-  $(DBD_NAME)_DBD += base.dbd
-endif
-
+ifneq ($(OS_CLASS), vxWorks)
 ifdef ADCORE
   # areaDetector provides a Makefile for things it needs and supplies
   -include $(ADCORE)/ADApp/commonDriverMakefile
@@ -53,7 +51,7 @@ ifdef ADSIMDETECTOR
   $(DBD_NAME)_DBD += simDetectorSupport.dbd
   $(PROD_NAME)_LIBS := simDetector $($(PROD_NAME)_LIBS)
 endif
-
+endif
 
 #ifdef TDS3000
 #  $(DBD_NAME)_DBD += devTDS3000.dbd
@@ -84,9 +82,7 @@ ifdef SNCSEQ
 endif
 
 ifdef ASYN
-  ifndef ADCORE
-    $(DBD_NAME)_DBD += asyn.dbd
-  endif
+  $(DBD_NAME)_DBD += asyn.dbd
   $(DBD_NAME)_DBD += drvAsynSerialPort.dbd drvAsynIPPort.dbd drvVxi11.dbd devGpib.dbd
   $(PROD_NAME)_LIBS := asyn $($(PROD_NAME)_LIBS)
 endif
@@ -102,23 +98,17 @@ ifdef SCALER
 endif
 
 ifdef CALC
-  ifndef ADCORE
-    $(DBD_NAME)_DBD += calcSupport.dbd
-  endif
+  $(DBD_NAME)_DBD += calcSupport.dbd
   $(PROD_NAME)_LIBS := calc $($(PROD_NAME)_LIBS)
 endif
 
 ifdef BUSY
-  ifndef ADCORE
-    $(DBD_NAME)_DBD += busySupport.dbd
-  endif
+  $(DBD_NAME)_DBD += busySupport.dbd
   $(PROD_NAME)_LIBS := busy $($(PROD_NAME)_LIBS)
 endif
 
 ifdef SSCAN
-  ifndef ADCORE
-    $(DBD_NAME)_DBD += sscanSupport.dbd
-  endif
+  $(DBD_NAME)_DBD += sscanSupport.dbd
   $(PROD_NAME)_LIBS := sscan $($(PROD_NAME)_LIBS)
   ifdef SNCSEQ
     $(DBD_NAME)_DBD += sscanProgressSupport.dbd
@@ -127,9 +117,7 @@ ifdef SSCAN
 endif
 
 ifdef AUTOSAVE
-  ifndef ADCORE
-    $(DBD_NAME)_DBD += asSupport.dbd
-  endif
+  $(DBD_NAME)_DBD += asSupport.dbd
   $(PROD_NAME)_LIBS := autosave $($(PROD_NAME)_LIBS)
 endif
 
@@ -143,9 +131,11 @@ ifdef MCA
   $(PROD_NAME)_LIBS := mca $($(PROD_NAME)_LIBS)
 endif
 
+ifneq ($(OS_CLASS), vxWorks)
 ifdef QUADEM
   $(DBD_NAME)_DBD += drvAHxxx.dbd drvTetrAMM.dbd
   $(PROD_NAME)_LIBS := quadEM $($(PROD_NAME)_LIBS)
+endif
 endif
 
 ifdef IP
@@ -197,9 +187,7 @@ ifdef DEVIOCSTATS
 endif
 
 ifdef ALIVE
-  ifndef ADCORE
-    $(DBD_NAME)_DBD += aliveSupport.dbd
-  endif
+  $(DBD_NAME)_DBD += aliveSupport.dbd
   $(PROD_NAME)_LIBS := alive $($(PROD_NAME)_LIBS)
 endif
 
