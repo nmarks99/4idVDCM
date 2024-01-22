@@ -9,6 +9,9 @@ cd ""
 #< cdCommands.vxWorks-ppc32
 < cdCommands.vxWorks-ppc32sf
 
+# Attempt to define local startup location
+local_startup = getenv("PWD")
+
 # How to set and get the clock rate (in Hz.  Default is 60 Hz)
 #sysClkRateSet(100)
 #sysClkRateGet()
@@ -27,7 +30,15 @@ sysCplusEnable=1
 ### Load synApps EPICS software
 load("xxx.munch")
 #ld(0,0,"xxx.munch")
-cd startup
+cd local_startup
+
+
+# Now that we have EPICS commands, use them to re-set some of the environment
+# variables to point to our IOC
+
+epicsEnvSet("STARTUP", local_startup)
+epicsEnvSet("TOP", "$(STARTUP)/../..")
+
 
 # Increase size of buffer for error logging from default 1256
 errlogInit(20000)
@@ -51,6 +62,12 @@ iocLogDisable=0
 
 #save_restoreSet_NFSHost("oxygen", "164.54.22.10")
 
+
+# common.iocsh uses a lua script to set a path for autosave, on Linux this
+# uses a file that gets built by the IOC, for vxWorks we need to use the
+# version on /APSshare. Thus, we set the search path to find xxx first
+
+epicsEnvSet("LUA_PATH", "$(XXX)/iocBoot/iocxxx/?.lua;;")
 
 iocsh 
 
