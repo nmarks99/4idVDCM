@@ -4,7 +4,10 @@ sysVmeMapShow
 
 cd ""
 < ../nfsCommands
-< cdCommands
+
+# Edit to match your arch
+#< cdCommands.vxWorks-ppc32
+< cdCommands.vxWorks-ppc32sf
 
 # How to set and get the clock rate (in Hz.  Default is 60 Hz)
 #sysClkRateSet(100)
