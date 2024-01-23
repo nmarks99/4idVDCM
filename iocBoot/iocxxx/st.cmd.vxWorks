@@ -5,12 +5,12 @@ sysVmeMapShow
 cd ""
 < ../nfsCommands
 
-# Edit to match your arch
-#< cdCommands.vxWorks-ppc32
+#- Edit to match your arch
+#- < cdCommands.vxWorks-ppc32
 < cdCommands.vxWorks-ppc32sf
 
-# Attempt to define local startup location
-local_startup = getenv("PWD")
+#- Edit to match local startup location
+local_startup = "/enter/startup/directory/here/"
 
 # How to set and get the clock rate (in Hz.  Default is 60 Hz)
 #sysClkRateSet(100)
@@ -33,13 +33,6 @@ load("xxx.munch")
 cd local_startup
 
 
-# Now that we have EPICS commands, use them to re-set some of the environment
-# variables to point to our IOC
-
-epicsEnvSet("STARTUP", local_startup)
-epicsEnvSet("TOP", "$(STARTUP)/../..")
-
-
 # Increase size of buffer for error logging from default 1256
 errlogInit(20000)
 
@@ -52,6 +45,8 @@ recDynLinkQsize = 1024
 dbLoadDatabase("$(XXX)/dbd/iocxxxVX.dbd")
 iocxxxVX_registerRecordDeviceDriver(pdbbase)
 
+epicsEnvSet("STARTUP", local_startup)
+
 shellPromptSet "iocxxx> "
 iocLogDisable=0
 
@@ -62,14 +57,17 @@ iocLogDisable=0
 
 #save_restoreSet_NFSHost("oxygen", "164.54.22.10")
 
+iocsh 
 
-# common.iocsh uses a lua script to set a path for autosave, on Linux this
-# uses a file that gets built by the IOC, for vxWorks we need to use the
-# version on /APSshare. Thus, we set the search path to find xxx first
+#- Now that we have EPICS commands, use them to re-set some of the environment
+#- variables to point to our IOC
+epicsEnvSet("TOP", "$(STARTUP)/../..")
+
+#- common.iocsh uses a lua script to set a path for autosave, on Linux this
+#- uses a file that gets built by the IOC, for vxWorks we need to use the
+#- version on /APSshare. Thus, we set the search path to find xxx first
 
 epicsEnvSet("LUA_PATH", "$(XXX)/iocBoot/iocxxx/?.lua;;")
-
-iocsh 
 
 < settings.iocsh
 < common.iocsh

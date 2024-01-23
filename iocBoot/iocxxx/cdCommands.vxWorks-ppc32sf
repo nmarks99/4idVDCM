@@ -1,7 +1,7 @@
 startup = "/APSshare/epics/synApps_6_3/support/xxx-R6-3/iocBoot/iocxxx"
 putenv("IOC=iocxxx")
-top = "/APSshare/epics/synApps_6_3/support/xxx-R6-3"
-putenv("TOP=/APSshare/epics/synApps_6_3/support/xxx-R6-3")
+top = "/net/aquila/export/APSmaster/gateway/epics/synApps_6_3/support/xxx-R6-3"
+putenv("TOP=/net/aquila/export/APSmaster/gateway/epics/synApps_6_3/support/xxx-R6-3")
 topbin = "/APSshare/epics/synApps_6_3/support/xxx-R6-3/bin/vxWorks-ppc32sf"
 support = "/APSshare/epics/synApps_6_3/support"
 putenv("SUPPORT=/APSshare/epics/synApps_6_3/support")
