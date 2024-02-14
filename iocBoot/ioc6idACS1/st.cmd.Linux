@@ -14,9 +14,6 @@ ioc6idACS1Linux_registerRecordDeviceDriver(pdbbase)
 < settings.iocsh
 < common.iocsh
 
-< AcsMotion.cmd
-
-
 #- devIocStats
 dbLoadRecords("$(DEVIOCSTATS)/db/iocAdminSoft.db","IOC=$(PREFIX)")
 #- PV aliases change :: into :
