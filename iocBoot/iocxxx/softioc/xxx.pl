@@ -14,8 +14,7 @@ BEGIN
 	
 	
 	# IOC prefix name, used to find the correct iocBoot directory and executable
-	$ENV{IOC_NAME}="xxx";
-	
+	$ENV{IOC_NAME}="xxx";	
 	
 	
 	#########################
@@ -66,6 +65,9 @@ BEGIN
 	##########################
 	# Config For This Script #
 	##########################
+	
+	# Disable base's IOC shell history 
+	$ENV{EPICS_IOCSH_HISTFILE}="";
 	
 	# Directory that contains all the command modules to be loaded
 	$ENV{IOC_COMMAND_DIR}="$ENV{IOC_STARTUP_DIR}/softioc/commands";
