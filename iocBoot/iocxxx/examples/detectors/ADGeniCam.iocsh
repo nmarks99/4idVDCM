@@ -8,8 +8,8 @@
 epicsEnvSet("GENICAM_GENTL64_PATH", "$(ADVIMBA)/bin/$(ARCH)")
 epicsEnvSet("EPICS_DB_INCLUDE_PATH", "$(ADCORE)/db:$(ADGENICAM)/db:$(ADVIMBA)/db")
 
-ADVimbaConfig("$(PORT)", "$(CAM_IP)", 0, 0, 0)
-asynSetTraceIOMask($(PORT), 0, 2)
+ADVimbaConfig("$(INSTANCE)", "$(CAM_IP)", 0, 0, 0)
+asynSetTraceIOMask($(INSTANCE), 0, 2)
 
 set_requestfile_path("$(ADGENICAM)/GenICamApp/Db")
 set_requestfile_path("$(ADVIMBA)/vimbaApp/Db")

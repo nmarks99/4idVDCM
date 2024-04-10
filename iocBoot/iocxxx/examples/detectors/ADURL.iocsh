@@ -13,7 +13,7 @@ URLDriverConfig("$(INSTANCE)", 0, 0)
 dbLoadRecords("$(ADURL)/db/URLDriver.template","P=$(PREFIX),R=$(INSTANCE):,PORT=$(INSTANCE),ADDR=0,TIMEOUT=1")
 
 # Create a standard arrays plugin.
-NDStdArraysConfigure("Image1", 3, 0, "$(PORT)", 0)
+NDStdArraysConfigure("Image1", 3, 0, "$(INSTANCE)", 0)
 
 #Create a standard arrays plugin, set it to get data from first simDetector driver.
 NDStdArraysConfigure("$(INSTANCE)Image", 3, 0, "$(INSTANCE)", 0, 2000000)

@@ -15,7 +15,7 @@ DexelaConfig("$(INSTANCE)", $(ID), 0, 0, 0, 0)
 dbLoadRecords("$(ADDEXELA)/db/Dexela.template", "P=$(PREFIX),R=$(INSTANCE):,PORT=$(INSTANCE),ADDR=0,TIMEOUT=1")
 
 # Create a standard arrays plugin, set it to get data from Driver.
-NDStdArraysConfigure("Image1", 3, 0, "$(PORT)", 0)
+NDStdArraysConfigure("Image1", 3, 0, "$(INSTANCE)", 0)
 
 # Need to determine certain values from input parameters
 iocshRun('epicsEnvSet("__FTVL", "$($(TYPE=Int16)_VAL)")', "Int8_VAL=UCHAR, UInt8_VAL=UCHAR, Int16_VAL=SHORT, UInt16_VAL=SHORT, Int32_VAL=LONG, UInt32_VAL=LONG, Float32_VAL=DOUBLE, Float64_VAL=DOUBLE")
