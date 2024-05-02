@@ -340,6 +340,12 @@ ifeq ($(OS_CLASS), vxWorks)
     $(PROD_NAME)_LIBS := oms DeltaTau $($(PROD_NAME)_LIBS)
   endif
 
+  ifdef ETHERIP
+    $(DBD_NAME)_DBD += ether_ip.dbd
+    $(PROD_NAME)_LIBS := ether_ip $($(PROD_NAME)_LIBS)
+  endif
+
+
 #  ifdef FLY
 #    $(DBD_NAME)_DBD += flyVXSupport.dbd
 #    $(PROD_NAME)_LIBS := fly $($(PROD_NAME)_LIBS)
