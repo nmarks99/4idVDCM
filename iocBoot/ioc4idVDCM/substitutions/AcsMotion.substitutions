@@ -2,12 +2,13 @@
 ##### Cinel Monochromator #####
 ###############################
 # Open loop steppers (encoders for verification)
+# Should set MRES = EFAC
+
 # Axis0 - Bragg angle
 # Axis1 - Crystal selection (X-translation)
 # Axis2 - Crystal gap (Y-translation) (MFLAGS.INVDOUT=1)
 # Axis3 - Pitch 2 (course)
 # Axis4 - Roll 2 (course)
-
 #|----------------|-------------------|---------------|
 #|    MOTOR       |       STEPF       |    EFAC       |
 #|----------------|-------------------|---------------|
@@ -22,15 +23,25 @@
 #| Roll 2         | 0.000000044       | 0.00000002677 |
 #|----------------|-------------------|---------------|
 
+# Bragg angle conversion:
+# 63.109133mm = 65.11deg (approx)
+# 0.01rad/mm = 0.5729577951308 deg/mm
+# 100mm/rad = 1.74532925199343 mm/deg
+# Note: drive and encoder are consistent, but dial indicator is flipped and offset.
+# To account for this we set MRES and ERES negative, and multiply them by the above
+# factor to get degrees
+# MRES = ERES = -EFAC*(0.5729577951308 deg/mm)
+# Then we need to set the appropriate offset. Frozen offset = 101.211 seems about right
+
 file "$(MOTOR)/db/asyn_motor.db"
 {
 pattern
-{N,   M,       DTYP,         PORT,  ADDR,         DESC,    EGU,  DIR,      VELO,  VBAS,   ACCL,  BDST,   BVEL,   BACC,   MRES,         PREC,  DHLM,   DLLM,  INIT, RTSM, RTRY}
-{1,  "m$(N)",  "asynMotor",  ACS1,  0,   "Bragg angle",     mm,  Pos,      0.10,  0.001,   0.1,     0,      1,    0.2,   0.000001,        4,  1000,  -1000,    "", "Never", 0}
-{2,  "m$(N)",  "asynMotor",  ACS1,  1,             "X",     mm,  Pos,      0.10,  0.001,   0.1,     0,      1,    0.2,   0.00005,         4,  1000,  -1000,    "", "Never", 0}
-{3,  "m$(N)",  "asynMotor",  ACS1,  2,             "Y",     mm,  Pos,      0.10,  0.001,   0.1,     0,      1,    0.2,   0.00005,         4,  1000,  -1000,    "", "Never", 0}
-{4,  "m$(N)",  "asynMotor",  ACS1,  3,       "Pitch 2",     mm,  Pos,      0.01,  0.001,   0.1,     0,      1,    0.2,   0.000001,        4,  1000,  -1000,    "", "Never", 0}
-{5,  "m$(N)",  "asynMotor",  ACS1,  4,        "Roll 2",    rad,  Pos,    0.0001,  0.00001, 0.1,     0,      1,    0.2,   0.00000002677,   4,  1000,  -1000,    "", "Never", 0}
+{N,  M,        DTYP,         PORT,  ADDR,          DESC,    EGU,  DIR,      VELO,  VBAS,   ACCL,  BDST,   BVEL,   BACC,   MRES,         PREC,  DHLM,   DLLM,  INIT, RTSM, RTRY}
+{1,  "m$(N)",  "asynMotor",  ACS1,  0,    "Bragg angle",     deg,  Pos,      0.10,  0.001,   0.1,     0,      1,    0.2,   -5.72957795e-07,        4,  1000,  -1000,    "", "Never", 0}
+{2,  "m$(N)",  "asynMotor",  ACS1,  1,              "X",     mm,  Pos,      0.10,  0.001,   0.1,     0,      1,    0.2,   0.00005,         4,  1000,  -1000,    "", "Never", 0}
+{3,  "m$(N)",  "asynMotor",  ACS1,  2,              "Y",     mm,  Pos,      0.10,  0.001,   0.1,     0,      1,    0.2,   0.00005,         4,  1000,  -1000,    "", "Never", 0}
+{4,  "m$(N)",  "asynMotor",  ACS1,  3,        "Pitch 2",     mm,  Pos,      0.01,  0.001,   0.1,     0,      1,    0.2,   0.000001,        4,  1000,  -1000,    "", "Never", 0}
+{5,  "m$(N)",  "asynMotor",  ACS1,  4,         "Roll 2",    rad,  Pos,    0.0001,  0.00001, 0.1,     0,      1,    0.2,   0.00000002677,   4,  1000,  -1000,    "", "Never", 0}
 }
 
 ### The feedback database is helpful for troubleshooting encoder problems

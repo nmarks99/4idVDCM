@@ -9,7 +9,7 @@ dbLoadTemplate("substitutions/AcsMotion.substitutions","P=$(PREFIX)")
 dbLoadRecords("$(ASYN)/db/asynRecord.db","P=$(PREFIX),R=asyn_1,PORT=ACS1_ETH,ADDR=0,OMAX=256,IMAX=256")
 
 # Set ERES to EFAC for each axis
-doAfterIocInit("dbpf('$(PREFIX)m1.ERES','0.000001')")
+doAfterIocInit("dbpf('$(PREFIX)m1.ERES','-5.72957795e-07')")
 doAfterIocInit("dbpf('$(PREFIX)m2.ERES','0.00005')")
 doAfterIocInit("dbpf('$(PREFIX)m3.ERES','0.00005')")
 doAfterIocInit("dbpf('$(PREFIX)m4.ERES','0.000001')")
