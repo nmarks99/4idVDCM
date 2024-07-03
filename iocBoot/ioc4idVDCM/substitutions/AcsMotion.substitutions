@@ -4,6 +4,16 @@
 # Open loop steppers (encoders for verification)
 # Should set MRES = EFAC
 
+## Bragg angle conversion ##
+# 63.109133mm = 65.11deg (approx)
+# 0.01rad/mm = 0.5729577951308 deg/mm
+#
+# Dial indicator moves opposite to motor and encoder. To account for this, we set MRES and ERES negative
+# MRES = ERES = -EFAC*(0.5729577951308 deg/mm),
+# and use an offset = 101.26886969629788 deg
+# The offset is calculated from  degrees = -m*(encoder reading) + offset 
+# with known point (63.109133mm, 65.11deg), slope m=0.5729577951308 deg/mm
+
 # Axis0 - Bragg angle
 # Axis1 - Crystal selection (X-translation)
 # Axis2 - Crystal gap (Y-translation) (MFLAGS.INVDOUT=1)
@@ -23,15 +33,6 @@
 #| Roll 2         | 0.000000044       | 0.00000002677 |
 #|----------------|-------------------|---------------|
 
-# Bragg angle conversion:
-# 63.109133mm = 65.11deg (approx)
-# 0.01rad/mm = 0.5729577951308 deg/mm
-# 100mm/rad = 1.74532925199343 mm/deg
-# Note: drive and encoder are consistent, but dial indicator is flipped and offset.
-# To account for this we set MRES and ERES negative, and multiply them by the above
-# factor to get degrees
-# MRES = ERES = -EFAC*(0.5729577951308 deg/mm)
-# Then we need to set the appropriate offset. Frozen offset = 101.211 seems about right
 
 file "$(MOTOR)/db/asyn_motor.db"
 {
