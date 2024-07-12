@@ -1,0 +1,39 @@
+# Disable crystal selection axis if Bragg angle
+# is not between 45 and 50deg or FE shutter is open
+# TODO: test shutter
+record(calcout, "$(P)DisableCrystalSelectCalc") {
+    field(INPA, "$(P)$(M_BRAGG).RBV CP")
+    field(INPB, "PA:04ID:A_BEAM_PRESENT CP")
+    field(CALC, "((A <= 45) || (A >= 50)) || B")
+    field(OUT, "$(P)$(M_X)_able.VAL PP")
+}
+
+# record(calcout, "$(P)IsCrystal1Calc") {
+    # field(INPA, "$(P)$(M_X).RBV CP")
+    # field(CALC, "(A > 0)") # TODO: fix
+    # field(OOPT, "When Non-zero")
+    # field(OUT, "$(P)SetBraggAngleLimits1.PROC")
+    # field(PINI, 1)
+# }
+#
+# record(calcout, "$(P)IsCrystal2Calc") {
+    # field(INPA, "$(P)$(M_X).RBV CP")
+    # field(CALC, "(A < 0)") # TODO: fix
+    # field(OOPT, "When Non-zero")
+    # field(OUT, "$(P)SetBraggAngleLimits2.PROC")
+    # field(PINI, 1)
+# }
+#
+# record(seq, "$(P)SetBraggAngleLimits1") {
+    # field(DOL0, "64.9")
+    # field(LNK0, "$(P)$(M_BRAGG).HLM PP")
+    # field(DOL1, "50.1")
+    # field(LNK1, "$(P)$(M_BRAGG).LLM PP")
+# }
+#
+# record(seq, "$(P)SetBraggAngleLimits2") {
+    # field(DOL0, "44.9")
+    # field(LNK0, "$(P)$(M_BRAGG).HLM PP")
+    # field(DOL1, "3.6")
+    # field(LNK1, "$(P)$(M_BRAGG).LLM PP")
+# }

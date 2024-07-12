@@ -16,8 +16,10 @@ ioc4idVDCMLinux_registerRecordDeviceDriver(pdbbase)
 
 < cmds/AcsMotion.cmd
 
-# Kohzu geometry 2
-# iocshLoad("$(OPTICS)/opticsApp/iocsh/kohzu_mono.iocsh", "PREFIX=$(PREFIX),M_THETA=m1,M_Y=m2,M_Z=m3,GEOM=2")
+# Prevent motion of crystal select axis (X) when Bragg is not between 45 and 50deg
+dbLoadRecords("$(TOP)/db/cinel_vdcm.db", "P=$(PREFIX), M_BRAGG=m1, M_X=m2")
+
+# Kohzu geometry 2 FIX: check which motors are which
 dbLoadRecords("$(OPTICS)/opticsApp/Db/kohzuSeq.db","P=$(PREFIX),M_THETA=m1,M_Y=m2,M_Z=m3,yOffLo=4,yOffHi=36")
 
 # Allstop, alldone
