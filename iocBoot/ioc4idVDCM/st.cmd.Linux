@@ -12,7 +12,7 @@ dbLoadDatabase("../../dbd/ioc4idVDCMLinux.dbd")
 ioc4idVDCMLinux_registerRecordDeviceDriver(pdbbase)
 
 < settings.iocsh
-# < common.iocsh
+< common.iocsh
 
 < cmds/AcsMotion.cmd
 
@@ -20,7 +20,7 @@ ioc4idVDCMLinux_registerRecordDeviceDriver(pdbbase)
 dbLoadRecords("$(TOP)/db/cinel_vdcm.db", "P=$(PREFIX), M_BRAGG=m1, M_X=m2")
 
 # Kohzu geometry 2 FIX: check which motors are which
-dbLoadRecords("$(OPTICS)/opticsApp/Db/kohzuSeq.db","P=$(PREFIX),M_THETA=m1,M_Y=m2,M_Z=m3,yOffLo=4,yOffHi=36")
+# dbLoadRecords("$(OPTICS)/opticsApp/Db/kohzuSeq.db","P=$(PREFIX),M_THETA=m1,M_Y=m2,M_Z=m3,yOffLo=4,yOffHi=36")
 
 # Allstop, alldone
 dbLoadRecords("$(MOTOR)/db/motorUtil.db","P=$(PREFIX)")
@@ -36,7 +36,7 @@ iocInit
 ###############################################################################
 
 ### startup State Notation Language programs
-seq &kohzuCtl, "P=$(PREFIX), M_THETA=m1, M_Y=m2, M_Z=m3, GEOM=1, logfile=kohzuCtl.log"
+# seq &kohzuCtl, "P=$(PREFIX), M_THETA=m1, M_Y=m2, M_Z=m3, GEOM=1, logfile=kohzuCtl.log"
 
 # write all the PV names to a local file
 dbl > dbl-all.txt
