@@ -17,9 +17,13 @@ doAfterIocInit("dbpf('$(PREFIX)m3.ERES','0.00005')")
 doAfterIocInit("dbpf('$(PREFIX)m4.ERES','2.245132426e-07')") # converted to deg
 doAfterIocInit("dbpf('$(PREFIX)m5.ERES','0.00000002677')")
 
-# set offset for bragg angle to match dial indicator
+# offset for bragg angle to match dial indicator
 doAfterIocInit("dbpf('$(PREFIX)m1.OFF','101.26886969629788')")
 doAfterIocInit("dbpf('$(PREFIX)m1.FOFF','1')") # frozen
+
+# offset for crystal selection (X) to zero at left limit
+doAfterIocInit("dbpf('$(PREFIX)m2.OFF','-55.0')")
+doAfterIocInit("dbpf('$(PREFIX)m2.FOFF','1')") # frozen
 
 # Set VMAX
 doAfterIocInit("dbpf('$(PREFIX)m1.VMAX','0.4')") # deg/s

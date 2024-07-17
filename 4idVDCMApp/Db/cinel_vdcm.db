@@ -1,39 +1,38 @@
-# Disable crystal selection axis if Bragg angle
-# is not between 45 and 50deg or FE shutter is open
+# Disable X axis if Bragg angle is not in [45, 50deg] or FE shutter is open
 # TODO: test shutter
-record(calcout, "$(P)DisableCrystalSelectCalc") {
+record(calcout, "$(P)disable_crystal_select_calc") {
     field(INPA, "$(P)$(M_BRAGG).RBV CP")
     field(INPB, "PA:04ID:A_BEAM_PRESENT CP")
     field(CALC, "((A <= 45) || (A >= 50)) || B")
     field(OUT, "$(P)$(M_X)_able.VAL PP")
 }
 
-# record(calcout, "$(P)IsCrystal1Calc") {
-    # field(INPA, "$(P)$(M_X).RBV CP")
-    # field(CALC, "(A > 0)") # TODO: fix
-    # field(OOPT, "When Non-zero")
-    # field(OUT, "$(P)SetBraggAngleLimits1.PROC")
-    # field(PINI, 1)
-# }
-#
-# record(calcout, "$(P)IsCrystal2Calc") {
-    # field(INPA, "$(P)$(M_X).RBV CP")
-    # field(CALC, "(A < 0)") # TODO: fix
-    # field(OOPT, "When Non-zero")
-    # field(OUT, "$(P)SetBraggAngleLimits2.PROC")
-    # field(PINI, 1)
-# }
-#
-# record(seq, "$(P)SetBraggAngleLimits1") {
-    # field(DOL0, "64.9")
-    # field(LNK0, "$(P)$(M_BRAGG).HLM PP")
-    # field(DOL1, "50.1")
-    # field(LNK1, "$(P)$(M_BRAGG).LLM PP")
-# }
-#
-# record(seq, "$(P)SetBraggAngleLimits2") {
-    # field(DOL0, "44.9")
-    # field(LNK0, "$(P)$(M_BRAGG).HLM PP")
-    # field(DOL1, "3.6")
-    # field(LNK1, "$(P)$(M_BRAGG).LLM PP")
-# }
+# Determines the currently selected crystal and sets $(P)CurrentCrystal accordingly
+record(calcout, "$(P)current_crystal_calc") {
+    field(INPA, "$(P)$(M_X).RBV CP")
+    field(INPB, "$(P)$(M_BRAGG).HLS CP")
+    field(INPC, "$(P)$(M_BRAGG).LLS CP")
+    field(CALC, "((A < 10) && !B && !C) ? 0 : ((A > 20) && !B && !C) ? 1 : 2") # TODO: fix
+    field(OUT, "$(P)CurrentCrystal PP")
+    field(PINI, 1)
+}
+
+# The currently selected crystal based on X axis location and bragg axis limit state
+record(mbbo, "$(P)CurrentCrystal") {
+    field(ZRST, "SiC") # ~1mm
+    field(ONST, "Si")  # ~27mm
+    field(TWST, "None")
+}
+
+# automaticallys set soft limits for the Bragg axis based on which crystal is selected
+record(calcout, "$(P)set_high_bragg_limit") {
+    field(INPA, "$(P)CurrentCrystal.VAL CP")
+    field(CALC, "(A == 0) ? 65 : (A == 1) ? 50 : 0")
+    field(OUT, "$(P)$(M_BRAGG).HLM PP")
+}
+
+record(calcout, "$(P)set_low_bragg_limit") {
+    field(INPA, "$(P)CurrentCrystal.VAL CP")
+    field(CALC, "(A == 0) ? 45 : (A == 1) ? 3.5 : 0")
+    field(OUT, "$(P)$(M_BRAGG).LLM PP")
+}
