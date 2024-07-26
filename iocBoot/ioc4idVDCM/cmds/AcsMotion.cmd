@@ -8,8 +8,6 @@ dbLoadTemplate("substitutions/AcsMotion.substitutions","P=$(PREFIX)")
 dbLoadRecords("$(ASYN)/db/asynRecord.db","P=$(PREFIX),R=asyn_1,PORT=ACS1,ADDR=0,OMAX=256,IMAX=256")
 
 
-# TODO: Get rid of this once we have autosave
-
 # Set ERES to EFAC for each axis
 doAfterIocInit("dbpf('$(PREFIX)m1.ERES','-5.72957795e-07')") # converted to deg
 doAfterIocInit("dbpf('$(PREFIX)m2.ERES','0.00005')")
@@ -24,6 +22,12 @@ doAfterIocInit("dbpf('$(PREFIX)m1.FOFF','1')") # frozen
 # offset for crystal selection (X) to zero at left limit
 doAfterIocInit("dbpf('$(PREFIX)m2.OFF','-55.0')")
 doAfterIocInit("dbpf('$(PREFIX)m2.FOFF','1')") # frozen
+
+# offset for crystal gap (y) to zero at left limit
+doAfterIocInit("dbpf('$(PREFIX)m3.OFF','-35.3507')")
+doAfterIocInit("dbpf('$(PREFIX)m3.FOFF','1')") # frozen
+doAfterIocInit("dbpf('$(PREFIX)m3.HLM','18.7')")
+doAfterIocInit("dbpf('$(PREFIX)m3.LLM','0.1')")
 
 # Set VMAX
 doAfterIocInit("dbpf('$(PREFIX)m1.VMAX','0.4')") # deg/s
