@@ -23,7 +23,7 @@ doAfterIocInit("dbpf('$(PREFIX)m1.FOFF','1')") # frozen
 doAfterIocInit("dbpf('$(PREFIX)m2.OFF','-55.0')")
 doAfterIocInit("dbpf('$(PREFIX)m2.FOFF','1')") # frozen
 
-# offset for crystal gap (y) to zero at left limit
+# offset for crystal gap (Y) to zero at left limit
 doAfterIocInit("dbpf('$(PREFIX)m3.OFF','-35.3507')")
 doAfterIocInit("dbpf('$(PREFIX)m3.FOFF','1')") # frozen
 doAfterIocInit("dbpf('$(PREFIX)m3.HLM','18.7')")

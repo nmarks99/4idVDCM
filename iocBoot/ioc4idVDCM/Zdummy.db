@@ -1,0 +1,56 @@
+record(motor, "$(P)$(SM)") {
+    field(DTYP, "Soft Channel")
+    field(DESC, "$(DESC=)")
+    field(OUT, "$(P)$(SM):Position.VAL PP MS")
+    field(RDBL, "$(P)$(SM):Readback.VAL NPP MS")
+    field(DINP, "$(P)$(SM):Done NPP MS")
+    field(STOO, "$(P)$(SM):stop_all.PROC PP MS")
+    field(MRES, "$(MRES=1.0)")
+    field(DHLM, "$(DHLM=1000)")
+    field(DLLM, "$(DLLM=-1000)")
+    field(PREC, "$(PREC=4)")
+    field(RRES, "$(RRES=1.0)")
+    field(URIP, "Yes")
+    field(RTRY, "0")
+    field(LOCK, "YES")
+    field(NTM, "NO")
+    field(DIR,"Pos")
+    field(VELO,"1.0")
+    field(EGU,"mm")
+    field(TWV,"1.0")
+    field(OFF,"0.0")
+    field(FOFF,"Frozen")
+}
+record(bo,"$(P)$(SM)_able") {
+    field(DESC,"motor enable")
+    field(PINI,"YES")
+    field(OUT,"$(P)$(SM)_ableput.A PP MS")
+    field(ZNAM,"Enable")
+    field(ONAM,"Disable")
+}
+record(transform,"$(P)$(SM)_ableput") {
+    field(CLCB,"a")
+    field(CLCC,"a")
+    field(OUTA,"$(P)$(SM).DISA NPP NMS")
+    field(OUTB,"$(P)$(SM).DISP NPP NMS")
+    field(OUTC,"$(P)$(SM).DISA NPP NMS")
+}
+
+record(calcout, "$(P)$(SM):Readback") {
+    field(DTYP, "Soft Channel")
+    field(INPA, "$(P)$(M_BRAGG).RBV CP")
+    field(CALC, "(0.0157/2)/(2*sin(D2R*A))")
+    field(PINI, "YES")
+}
+
+# Done when all three motors are done
+record(calcout, "$(P)$(SM):Done") {
+    field(DTYP, "Soft Channel")
+    field(INPA, "$(P)$(M_BRAGG).DMOV CP")
+    field(CALC,"A")
+    field(PINI, "YES")
+}
+
+record(ao, "$(P)$(SM):Position") {
+    field(DTYP, "Soft Channel")
+}
