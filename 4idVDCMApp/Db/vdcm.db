@@ -24,7 +24,29 @@ record(mbbo, "$(P)CurrentCrystal") {
     field(TWST, "None")
 }
 
-# automaticallys set soft limits for the Bragg axis based on which crystal is selected
+record(ao, "$(P)SiCPosition") {
+    # ~1mm
+    field(DESC, "Position of SiC crystal")
+    field(PREC, 3)
+}
+
+record(ao, "$(P)SiPosition") {
+    # ~27mm
+    field(DESC, "Position of Si crystal")
+    field(PREC, 3)
+}
+
+record(seq, "$(P)MoveToSi") {
+    field(DOL0, "$(P)SiPosition.VAL")
+    field(LNK0, "$(P)$(M_X).VAL")
+}
+
+record(seq, "$(P)MoveToSiC") {
+    field(DOL0, "$(P)SiCPosition.VAL")
+    field(LNK0, "$(P)$(M_X).VAL")
+}
+
+# automatically set soft limits for the Bragg axis based on which crystal is selected
 record(calcout, "$(P)set_high_bragg_limit") {
     field(INPA, "$(P)CurrentCrystal.VAL CP")
     field(CALC, "(A == 0) ? 65 : (A == 1) ? 50 : 0")

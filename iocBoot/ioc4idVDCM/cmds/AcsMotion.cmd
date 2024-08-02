@@ -15,19 +15,22 @@ doAfterIocInit("dbpf('$(PREFIX)m3.ERES','0.00005')")
 doAfterIocInit("dbpf('$(PREFIX)m4.ERES','2.245132426e-07')") # converted to deg
 doAfterIocInit("dbpf('$(PREFIX)m5.ERES','0.00000002677')")
 
-# offset for bragg angle to match dial indicator
+# Offset for bragg angle to match indicator on mono
 doAfterIocInit("dbpf('$(PREFIX)m1.OFF','101.26886969629788')")
 doAfterIocInit("dbpf('$(PREFIX)m1.FOFF','1')") # frozen
 
-# offset for crystal selection (X) to zero at left limit
+# Set monitor deadband for Bragg motor
+doAfterIocInit("dbpf('$(PREFIX)m1.MDEL','0.0001')")
+
+# Offset for crystal selection (X) to zero at left limit
 doAfterIocInit("dbpf('$(PREFIX)m2.OFF','-55.0')")
 doAfterIocInit("dbpf('$(PREFIX)m2.FOFF','1')") # frozen
 
-# offset for crystal gap (Y) to zero at left limit
-doAfterIocInit("dbpf('$(PREFIX)m3.OFF','-35.3507')")
+# offset for crystal gap (Y) with known enc=52.209 -> 25mm gap
+doAfterIocInit("dbpf('$(PREFIX)m3.OFF','-27.209')")
 doAfterIocInit("dbpf('$(PREFIX)m3.FOFF','1')") # frozen
-doAfterIocInit("dbpf('$(PREFIX)m3.HLM','18.7')")
-doAfterIocInit("dbpf('$(PREFIX)m3.LLM','0.1')")
+doAfterIocInit("dbpf('$(PREFIX)m3.HLM','26.8')")
+doAfterIocInit("dbpf('$(PREFIX)m3.LLM','8.2')")
 
 # Set VMAX
 doAfterIocInit("dbpf('$(PREFIX)m1.VMAX','0.4')") # deg/s
@@ -42,3 +45,9 @@ doAfterIocInit("dbpf('$(PREFIX)m2.UEIP','1')")
 doAfterIocInit("dbpf('$(PREFIX)m3.UEIP','1')")
 doAfterIocInit("dbpf('$(PREFIX)m4.UEIP','1')")
 doAfterIocInit("dbpf('$(PREFIX)m5.UEIP','1')")
+
+# Define the crystal locations
+doAfterIocInit("dbpf('$(PREFIX)SiPosition','27.5')")
+doAfterIocInit("dbpf('$(PREFIX)SiCPosition','1.0')")
+doAfterIocInit("dbpf('$(PREFIX)SiPosition.DISP','1')") # disable put
+doAfterIocInit("dbpf('$(PREFIX)SiCPosition.DISP','1')")
