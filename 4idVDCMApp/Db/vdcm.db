@@ -8,16 +8,17 @@ record(calcout, "$(P)disable_crystal_select_calc") {
 }
 
 # Determines the currently selected crystal and sets $(P)CurrentCrystal accordingly
+# TODO: CALC should use defined crystal positions
 record(calcout, "$(P)current_crystal_calc") {
     field(INPA, "$(P)$(M_X).RBV CP")
     field(INPB, "$(P)$(M_BRAGG).HLS CP")
     field(INPC, "$(P)$(M_BRAGG).LLS CP")
-    field(CALC, "((A < 10) && !B && !C) ? 0 : ((A > 20) && !B && !C) ? 1 : 2") # TODO: fix
+    field(CALC, "((A < 10) && !B && !C) ? 0 : ((A > 20) && !B && !C) ? 1 : 2")
     field(OUT, "$(P)CurrentCrystal PP")
     field(PINI, 1)
 }
 
-# The currently selected crystal based on X axis location and bragg axis limit state
+# The currently selected crystal
 record(mbbo, "$(P)CurrentCrystal") {
     field(ZRST, "SiC") # ~1mm
     field(ONST, "Si")  # ~27mm
