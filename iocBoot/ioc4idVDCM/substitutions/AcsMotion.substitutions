@@ -5,6 +5,7 @@
 # Should set MRES = EFAC
 
 ## Bragg angle conversion ##
+# (0.45e-6 rad/step)*(500steps/2pi rad)*(2pi*100mm) = 0.0225mm/turn
 # 63.109133mm = 65.11deg (approx)
 # 0.01rad/mm = 0.5729577951308 deg/mm
 # Dial indicator moves opposite to motor and encoder. To account for this, we set MRES and ERES negative
@@ -14,13 +15,14 @@
 # with known point (63.109133mm, 65.11deg), slope m=0.5729577951308 deg/mm from datasheet
 
 ## Course Pitch conversion ##
-# 0.2245132426 deg/mm
-# MRES = ERES = EFAC*(0.2245132426 deg/mm)
+# (52.42nrad/step) * (200step/turn) * (2pi*255.2mm/2pi rad) = 0.0026755168 mm/turn
+# 0.2245132426 deg/mm = 3.9184953 mrad/mm
+# MRES = ERES = EFAC*(3.9184953 mrad/mm)
 
 # Axis0 - Bragg angle
 # Axis1 - Crystal selection (X-translation)
-# Axis2 - Crystal gap (Y-translation) (MFLAGS.INVDOUT=1)
-# Axis3 - Pitch 2 (course)
+# Axis2 - Crystal gap (Y-translation), MFLAGS(2).#INVDOUT=1, swap limit switch wiring
+# Axis3 - Pitch 2 (course), MFLAGS(3).INVDOUT=1, MFLAGSX(3).#HLIMSWAP=1
 # Axis4 - Roll 2 (course)
 #|----------------|-------------------|---------------|
 #|    MOTOR       |       STEPF       |    EFAC       |
@@ -44,7 +46,7 @@ pattern
 {1,  "m$(N)",  "asynMotor",  ACS1,  0,    "Bragg angle",    deg,  Pos,     0.10,  0.0001,    0.1,     0,      1,    0.2,   -5.72957795e-07,     4,  1000,  -1000,    "", "Never", 0}
 {2,  "m$(N)",  "asynMotor",  ACS1,  1,              "X",     mm,  Pos,     0.10,  0.0001,    0.1,     0,      1,    0.2,   0.00005,             4,  1000,  -1000,    "", "Never", 0}
 {3,  "m$(N)",  "asynMotor",  ACS1,  2,              "Y",     mm,  Pos,     0.10,  0.0001,    0.1,     0,      1,    0.2,   0.00005,             4,  1000,  -1000,    "", "Never", 0}
-{4,  "m$(N)",  "asynMotor",  ACS1,  3,        "Pitch 2",    deg,  Pos,    0.002,  0.0001,    0.1,     0,      1,    0.2,   2.245132426e-07,     4,  1000,  -1000,    "", "Never", 0}
+{4,  "m$(N)",  "asynMotor",  ACS1,  3,        "Pitch 2",    deg,  Pos,    0.08,  0.0001,    0.1,     0,      1,    0.2,   3.9184953e-6,     4,  1000,  -1000,    "", "Never", 0}
 {5,  "m$(N)",  "asynMotor",  ACS1,  4,         "Roll 2",    rad,  Pos,   0.0001,  0.00001,  0.1,     0,      1,    0.2,   0.00000002677,       4,  1000,  -1000,    "", "Never", 0}
 }
 

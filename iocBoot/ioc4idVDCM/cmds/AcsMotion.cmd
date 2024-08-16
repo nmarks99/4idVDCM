@@ -12,7 +12,7 @@ dbLoadRecords("$(ASYN)/db/asynRecord.db","P=$(PREFIX),R=asyn_1,PORT=ACS1,ADDR=0,
 doAfterIocInit("dbpf('$(PREFIX)m1.ERES','-5.72957795e-07')") # converted to deg
 doAfterIocInit("dbpf('$(PREFIX)m2.ERES','0.00005')")
 doAfterIocInit("dbpf('$(PREFIX)m3.ERES','0.00005')")
-doAfterIocInit("dbpf('$(PREFIX)m4.ERES','2.245132426e-07')") # converted to deg
+doAfterIocInit("dbpf('$(PREFIX)m4.ERES','3.9184953e-6')") # converted to mrad
 doAfterIocInit("dbpf('$(PREFIX)m5.ERES','0.00000002677')")
 
 # Offset for bragg angle to match indicator on mono
@@ -32,11 +32,18 @@ doAfterIocInit("dbpf('$(PREFIX)m3.FOFF','1')") # frozen
 doAfterIocInit("dbpf('$(PREFIX)m3.HLM','26.8')")
 doAfterIocInit("dbpf('$(PREFIX)m3.LLM','8.2')")
 
+# offset for pitch 2
+doAfterIocInit("dbpf('$(PREFIX)m4.OFF','-99.1665')") # centered between limits
+doAfterIocInit("dbpf('$(PREFIX)m4.FOFF','1')") # frozen
+doAfterIocInit("dbpf('$(PREFIX)m4.HLM','5.2')")
+doAfterIocInit("dbpf('$(PREFIX)m4.LLM','-5.2')")
+
 # Set VMAX
 doAfterIocInit("dbpf('$(PREFIX)m1.VMAX','0.4')") # deg/s
 doAfterIocInit("dbpf('$(PREFIX)m2.VMAX','1.0')") # mm/s
 doAfterIocInit("dbpf('$(PREFIX)m3.VMAX','0.6')") # mm/s
-doAfterIocInit("dbpf('$(PREFIX)m4.VMAX','0.01')") # deg/s
+# doAfterIocInit("dbpf('$(PREFIX)m4.VMAX','0.01')") # deg/s
+doAfterIocInit("dbpf('$(PREFIX)m4.VMAX','0.17')") # mrad/s
 doAfterIocInit("dbpf('$(PREFIX)m5.VMAX','0.0004')") # rad/s
 
 # Set use encoder = YES
