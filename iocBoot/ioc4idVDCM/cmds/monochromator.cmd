@@ -1,0 +1,122 @@
+###############################
+##### Cinel Monochromator #####
+###############################
+# Open loop steppers (encoders for verification)
+# Must set MRES = EFAC
+
+# Axis0 - Bragg angle
+# Axis1 - Crystal selection (X-translation)
+# Axis2 - Crystal gap (Y-translation), MFLAGS(2).#INVDOUT=1, swap limit switch wiring
+# Axis3 - Pitch 2 (course), MFLAGS(3).INVDOUT=1, MFLAGSX(3).#HLIMSWAP=1
+# Axis4 - Roll 2 (course)
+#|----------------|-------------------|---------------|
+#|    MOTOR       |       STEPF       |    EFAC       |
+#|----------------|-------------------|---------------|
+#| Bragg          | 0.0000045         | 0.000001      |
+#|----------------|-------------------|---------------|
+#| Crystal select | 0.0001            | 0.00005       |
+#|----------------|-------------------|---------------|
+#| Crystal gap    | 0.0000666667      | 0.00005       |
+#|----------------|-------------------|---------------|
+#| Pitch 2        | 0.00000510204     | 0.000001      |
+#|----------------|-------------------|---------------|
+#| Roll 2         | 0.000000044       | 0.00000002677 |
+#|----------------|-------------------|---------------|
+
+# ----------------------------
+# Unit Conversions
+# ----------------------------
+## Bragg angle ##
+# User units in the ACS controller are in mm. We convert to degrees in EPICS
+# (0.45e-6 rad/step)*(500steps/2pi rad)*(2pi*100mm) = 0.0225mm/turn
+# 63.109133mm = 65.11deg (approx)
+# 0.01rad/mm = 0.5729577951308 deg/mm
+# Dial indicator moves opposite to motor and encoder. To account for this, we set MRES and ERES negative
+# MRES = ERES = -EFAC*(0.5729577951308 deg/mm),
+# and use an offset=101.26886969629788 deg so EPICS readback matches dial indicator
+# The offset is calculated from  degrees = -m*(encoder reading) + offset 
+# with known point (63.109133mm, 65.11deg), slope m=0.5729577951308 deg/mm from datasheet
+
+## Crystal Selection ##
+# User units in the ACS controller are in mm. Same in EPICS
+
+## Crystal Gap ##
+# User units in the ACS controller are in mm. Same in EPICS
+
+## Course Pitch ##
+# User units in the ACS controller are in mm. We convert to mrad in EPICS
+# (52.42nrad/step) * (200step/turn) * (2pi*255.2mm/2pi rad) = 0.0026755168 mm/turn
+# 0.2245132426 deg/mm = 3.9184953 mrad/mm
+# MRES = ERES = EFAC*(3.9184953 mrad/mm)
+
+## Course Roll ##
+# User units in the ACS controller are in ?
+# ----------------------------
+
+######################################################################
+
+# Load ACS support, it is build as a standalone module
+iocshLoad("$(MOTOR_ACSMOTION)/iocsh/ACS_Motion_tcp.iocsh", "INSTANCE=ACS1,IP_ADDR=164.54.115.16,NUM_AXES=5,IDLE_POLL=0.2")
+
+# Load motor records
+dbLoadTemplate("substitutions/AcsMotion_monochromator.substitutions","P=$(PREFIX)")
+
+# Load an asyn record for debugging
+dbLoadRecords("$(ASYN)/db/asynRecord.db","P=$(PREFIX),R=asyn_1,PORT=ACS1,ADDR=0,OMAX=256,IMAX=256")
+
+# logic for crystal selection, bragg soft limits, etc.
+dbLoadRecords("$(TOP)/db/vdcm.db", "P=$(PREFIX), M_BRAGG=m1, M_X=m2")
+
+# Kohzu mono support (geometry 2)
+dbLoadRecords("$(TOP)/db/Zdummy.db", "P=$(PREFIX), SM=Zdummy, M_BRAGG=m1, MRES=1e-6") # no real Z axis
+dbLoadRecords("$(OPTICS)/opticsApp/Db/kohzuSeq.db","P=$(PREFIX),M_THETA=m1,M_Y=m3,M_Z=Zdummy,yOffLo=4,yOffHi=36")
+doAfterIocInit('seq &kohzuCtl, "P=$(PREFIX), M_THETA=m1, M_Y=m3, M_Z=Zdummy, GEOM=2, logfile=kohzuCtl.log"')
+doAfterIocInit('dbpf("$(PREFIX)Kohzu_yOffsetAO", "15.7")')
+
+######################################################################
+
+## Bragg angle ##
+doAfterIocInit("dbpf('$(PREFIX)m1.ERES','-5.72957795e-07')") # ERES=EFAC*conversion factor
+doAfterIocInit("dbpf('$(PREFIX)m1.OFF','101.26886969629788')") # to match dial indicator
+doAfterIocInit("dbpf('$(PREFIX)m1.FOFF','1')") # frozen offset
+doAfterIocInit("dbpf('$(PREFIX)m1.MDEL','0.0001')") # increase monitor deadband
+doAfterIocInit("dbpf('$(PREFIX)m1.VMAX','0.4')") # max velocity deg/s
+
+## Crystal Selection ##
+doAfterIocInit("dbpf('$(PREFIX)m2.ERES','0.00005')") # ERES = EFAC
+doAfterIocInit("dbpf('$(PREFIX)m2.OFF','-55.0')") # zero at left limit
+doAfterIocInit("dbpf('$(PREFIX)m2.FOFF','1')") # frozen offset
+doAfterIocInit("dbpf('$(PREFIX)m2.VMAX','1.0')") # max velocity mm/s
+
+## Crystal Gap ##
+doAfterIocInit("dbpf('$(PREFIX)m3.ERES','0.00005')") # ERES = EFAC
+doAfterIocInit("dbpf('$(PREFIX)m3.OFF','-27.209')")
+doAfterIocInit("dbpf('$(PREFIX)m3.FOFF','1')") # frozen offset
+doAfterIocInit("dbpf('$(PREFIX)m3.VMAX','0.6')") # max velocity mm/s
+doAfterIocInit("dbpf('$(PREFIX)m3.HLM','26.8')")
+doAfterIocInit("dbpf('$(PREFIX)m3.LLM','8.2')")
+
+## Course Pitch ## 
+doAfterIocInit("dbpf('$(PREFIX)m4.ERES','3.9184953e-6')") # converted to mrad
+doAfterIocInit("dbpf('$(PREFIX)m4.OFF','-99.1665')") # centered between limits
+doAfterIocInit("dbpf('$(PREFIX)m4.FOFF','1')") # frozen
+doAfterIocInit("dbpf('$(PREFIX)m4.VMAX','0.17')") # max velocity mrad/s
+doAfterIocInit("dbpf('$(PREFIX)m4.HLM','5.2')")
+doAfterIocInit("dbpf('$(PREFIX)m4.LLM','-5.2')")
+
+## Course Roll ##
+doAfterIocInit("dbpf('$(PREFIX)m5.ERES','0.00000002677')")
+doAfterIocInit("dbpf('$(PREFIX)m5.VMAX','0.0004')") # rad/s
+
+# Set use encoder = YES
+doAfterIocInit("dbpf('$(PREFIX)m1.UEIP','1')")
+doAfterIocInit("dbpf('$(PREFIX)m2.UEIP','1')")
+doAfterIocInit("dbpf('$(PREFIX)m3.UEIP','1')")
+doAfterIocInit("dbpf('$(PREFIX)m4.UEIP','1')")
+doAfterIocInit("dbpf('$(PREFIX)m5.UEIP','1')")
+
+# Define the crystal locations
+doAfterIocInit("dbpf('$(PREFIX)SiPosition','27.5')")
+doAfterIocInit("dbpf('$(PREFIX)SiCPosition','1.0')")
+doAfterIocInit("dbpf('$(PREFIX)SiPosition.DISP','1')") # disable put
+doAfterIocInit("dbpf('$(PREFIX)SiCPosition.DISP','1')")

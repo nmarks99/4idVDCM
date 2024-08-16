@@ -14,17 +14,8 @@ ioc4idVDCMLinux_registerRecordDeviceDriver(pdbbase)
 < settings.iocsh
 < common.iocsh
 
-# Setup motors for ACS MP4U controller
-< cmds/AcsMotion.cmd
-
-# logic for crystal selection, bragg soft limits, etc.
-dbLoadRecords("$(TOP)/db/vdcm.db", "P=$(PREFIX), M_BRAGG=m1, M_X=m2")
-
-# Kohzu mono support (geometry 2)
-dbLoadRecords("$(TOP)/db/Zdummy.db", "P=$(PREFIX), SM=Zdummy, M_BRAGG=m1, MRES=1e-6") # no real Z axis
-dbLoadRecords("$(OPTICS)/opticsApp/Db/kohzuSeq.db","P=$(PREFIX),M_THETA=m1,M_Y=m3,M_Z=Zdummy,yOffLo=4,yOffHi=36")
-doAfterIocInit('seq &kohzuCtl, "P=$(PREFIX), M_THETA=m1, M_Y=m3, M_Z=Zdummy, GEOM=2, logfile=kohzuCtl.log"')
-doAfterIocInit('dbpf("$(PREFIX)Kohzu_yOffsetAO", "15.7")')
+# Setup ACS motors for Cinel monochromator
+< cmds/monochromator.cmd
 
 # Allstop, alldone
 dbLoadRecords("$(MOTOR)/db/motorUtil.db","P=$(PREFIX)")
