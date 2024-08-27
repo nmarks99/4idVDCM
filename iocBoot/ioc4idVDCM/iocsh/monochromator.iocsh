@@ -7,7 +7,7 @@
 # Axis0 - Bragg angle
 # Axis1 - Crystal selection (X-translation)
 # Axis2 - Crystal gap (Y-translation), MFLAGS(2).#INVDOUT=1, swap limit switch wiring
-# Axis3 - Pitch 2 (course), MFLAGS(3).INVDOUT=1, MFLAGSX(3).#HLIMSWAP=1
+# Axis3 - Pitch 2 (course), MFLAGS(3).#INVDOUT=1, MFLAGSX(3).#HLIMSWAP=1
 # Axis4 - Roll 2 (course)
 #|----------------|-------------------|---------------|
 #|    MOTOR       |       STEPF       |    EFAC       |
@@ -29,7 +29,7 @@
 ## Bragg angle ##
 # User units in the ACS controller are in mm. We convert to degrees in EPICS
 # (0.45e-6 rad/step)*(500steps/2pi rad)*(2pi*100mm) = 0.0225mm/turn
-# 63.109133mm = 65.11deg (approx)
+# 63.109133mm = 65.11deg (approx) from dial indicator on mono
 # 0.01rad/mm = 0.5729577951308 deg/mm
 # Dial indicator moves opposite to motor and encoder. To account for this, we set MRES and ERES negative
 # MRES = ERES = -EFAC*(0.5729577951308 deg/mm),
@@ -50,8 +50,7 @@
 # MRES = ERES = EFAC*(3.9184953 mrad/mm)
 
 ## Course Roll ##
-# User units in the ACS controller are in ?
-# ----------------------------
+# TODO: check units
 
 ######################################################################
 
@@ -59,10 +58,10 @@
 iocshLoad("$(MOTOR_ACSMOTION)/iocsh/ACS_Motion_tcp.iocsh", "INSTANCE=ACS1,IP_ADDR=164.54.115.16,NUM_AXES=5,IDLE_POLL=0.2")
 
 # Load motor records
-dbLoadTemplate("substitutions/AcsMotion_monochromator.substitutions","P=$(PREFIX)")
+dbLoadTemplate("substitutions/AcsMotion_mono.substitutions","P=$(PREFIX)")
 
 # Load an asyn record for debugging
-dbLoadRecords("$(ASYN)/db/asynRecord.db","P=$(PREFIX),R=asyn_1,PORT=ACS1,ADDR=0,OMAX=256,IMAX=256")
+dbLoadRecords("$(ASYN)/db/asynRecord.db","P=$(PREFIX),R=ACS1_asyn,PORT=ACS1,ADDR=0,OMAX=256,IMAX=256")
 
 # logic for crystal selection, bragg soft limits, etc.
 dbLoadRecords("$(TOP)/db/vdcm.db", "P=$(PREFIX), M_BRAGG=m1, M_X=m2")

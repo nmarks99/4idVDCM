@@ -15,7 +15,7 @@ ioc4idVDCMLinux_registerRecordDeviceDriver(pdbbase)
 < common.iocsh
 
 # Setup ACS motors for Cinel monochromator
-< cmds/monochromator.cmd
+< iocsh/monochromator.iocsh
 
 # Allstop, alldone
 dbLoadRecords("$(MOTOR)/db/motorUtil.db","P=$(PREFIX)")
