@@ -50,7 +50,8 @@
 # MRES = ERES = EFAC*(3.9184953 mrad/mm)
 
 ## Course Roll ##
-# TODO: check units
+# User units in the ACS controller are in radians.
+# In EPICS we want mrad, so we set MRES = ERES = EFAC*1000
 
 ######################################################################
 
@@ -73,8 +74,10 @@ doAfterIocInit('seq &kohzuCtl, "P=$(PREFIX), M_THETA=m1, M_Y=m3, M_Z=Zdummy, GEO
 doAfterIocInit('dbpf("$(PREFIX)Kohzu_yOffsetAO", "15.7")')
 
 ######################################################################
+# Much of the below isn't needed once autosave is enabled
 
 ## Bragg angle ##
+# TODO: E_AOFFS in the ACS controller instead?
 doAfterIocInit("dbpf('$(PREFIX)m1.ERES','-5.72957795e-07')") # ERES=EFAC*conversion factor
 doAfterIocInit("dbpf('$(PREFIX)m1.OFF','101.26886969629788')") # to match dial indicator
 doAfterIocInit("dbpf('$(PREFIX)m1.FOFF','1')") # frozen offset
@@ -104,8 +107,12 @@ doAfterIocInit("dbpf('$(PREFIX)m4.HLM','5.2')")
 doAfterIocInit("dbpf('$(PREFIX)m4.LLM','-5.2')")
 
 ## Course Roll ##
-doAfterIocInit("dbpf('$(PREFIX)m5.ERES','0.00000002677')")
-doAfterIocInit("dbpf('$(PREFIX)m5.VMAX','0.0004')") # rad/s
+doAfterIocInit("dbpf('$(PREFIX)m5.ERES','0.00002677')") # converted to mrad
+doAfterIocInit("dbpf('$(PREFIX)m5.OFF','2.1')") # centered between limits
+doAfterIocInit("dbpf('$(PREFIX)m5.FOFF','1')") # frozen
+doAfterIocInit("dbpf('$(PREFIX)m5.VMAX','0.4')") # mrad/s
+doAfterIocInit("dbpf('$(PREFIX)m5.HLM','7.5')")
+doAfterIocInit("dbpf('$(PREFIX)m5.LLM','-11.7')")
 
 # Set use encoder = YES
 doAfterIocInit("dbpf('$(PREFIX)m1.UEIP','1')")

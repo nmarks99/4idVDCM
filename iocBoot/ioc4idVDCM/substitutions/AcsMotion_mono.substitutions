@@ -1,12 +1,12 @@
 file "$(MOTOR)/db/asyn_motor.db"
 {
 pattern
-{N,  M,        DTYP,         PORT,  ADDR,          DESC,    EGU,  DIR,  VELO,    VBAS,   ACCL,  BDST,   BVEL,   BACC,  MRES,             PREC,  DHLM,   DLLM,  INIT, RTSM, RTRY}
-{1,  "m$(N)",  "asynMotor",  ACS1,  0,    "Bragg angle",    deg,  Pos,  0.10,    0.0001,  0.1,     0,      1,    0.2,  -5.72957795e-07,  4,     1000,  -1000,    "", "Never", 0}
-{2,  "m$(N)",  "asynMotor",  ACS1,  1,              "X",     mm,  Pos,  0.10,    0.0001,  0.1,     0,      1,    0.2,  0.00005,          4,     1000,  -1000,    "", "Never", 0}
-{3,  "m$(N)",  "asynMotor",  ACS1,  2,              "Y",     mm,  Pos,  0.10,    0.0001,  0.1,     0,      1,    0.2,  0.00005,          4,     1000,  -1000,    "", "Never", 0}
-{4,  "m$(N)",  "asynMotor",  ACS1,  3,        "Pitch 2",    deg,  Pos,  0.08,    0.0001,  0.1,     0,      1,    0.2,  3.9184953e-6,     4,     1000,  -1000,    "", "Never", 0}
-{5,  "m$(N)",  "asynMotor",  ACS1,  4,         "Roll 2",    rad,  Pos,  0.0001,  0.00001, 0.1,     0,      1,    0.2,  0.00000002677,    4,     1000,  -1000,    "", "Never", 0}
+{N,  M,        DTYP,         PORT,  ADDR,          DESC,    EGU,  DIR,  VELO,  VBAS,   ACCL,  BDST,   BVEL,   BACC,  MRES,             PREC,  DHLM,   DLLM,  INIT, RTSM, RTRY}
+{1,  "m$(N)",  "asynMotor",  ACS1,  0,    "Bragg Angle",    deg,  Pos,  0.10,  0.0001,  0.1,     0,      1,    0.2,  -5.72957795e-07,  4,     1000,  -1000,    "", "Never", 0}
+{2,  "m$(N)",  "asynMotor",  ACS1,  1, "Crystal Select",     mm,  Pos,  0.10,  0.0001,  0.1,     0,      1,    0.2,  0.00005,          4,     1000,  -1000,    "", "Never", 0}
+{3,  "m$(N)",  "asynMotor",  ACS1,  2,    "Crystal Gap",     mm,  Pos,  0.10,  0.0001,  0.1,     0,      1,    0.2,  0.00005,          4,     1000,  -1000,    "", "Never", 0}
+{4,  "m$(N)",  "asynMotor",  ACS1,  3, "Coarse Pitch 2",    deg,  Pos,  0.08,  0.0001,  0.1,     0,      1,    0.2,  3.9184953e-6,     4,     1000,  -1000,    "", "Never", 0}
+{5,  "m$(N)",  "asynMotor",  ACS1,  4,  "Coarse Roll 2",   mrad,  Pos,  0.1,     0.01,  0.1,     0,      1,    0.2,  0.00002677,       4,     1000,  -1000,    "", "Never", 0}
 }
 
 ### The feedback database is helpful for troubleshooting encoder problems
