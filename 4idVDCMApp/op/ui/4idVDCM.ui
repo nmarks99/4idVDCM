@@ -170,7 +170,7 @@ QTabBar::tab:selected
 QWidget[Fill=&quot;True&quot;] { background: rgba(0,0,0,0); }</string>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="tab">
           <property name="Fill" stdset="0">
@@ -1190,13 +1190,13 @@ QWidget[Fill=&quot;True&quot;] { background: rgba(0,0,0,0); }</string>
               </color>
              </property>
              <property name="labels">
-              <string>Kohzu Graphic (GEOM 1);Kohzu Graphic (GEOM 2);KohzuSeq (tiny);KohzuSeq;KohzuSeq (All);Energy-scan parameters;Theta-scan parameters;Wavelength-scan parameters</string>
+              <string>Kohzu Graphic (GEOM 1);Kohzu Graphic (GEOM 2);KohzuSeq (tiny);KohzuSeq;KohzuSeq (All);Mono motors;Energy-scan parameters;Theta-scan parameters;Wavelength-scan parameters</string>
              </property>
              <property name="files">
-              <string>kohzuGraphic.ui;kohzu2Graphic.ui;kohzuSeqCtl_tiny.ui;kohzuSeqCtl.ui;kohzuSeqCtl_All.ui;scanParms.ui;scanParms.ui;scanParms.ui</string>
+              <string>kohzuGraphic.ui;kohzu2Graphic.ui;kohzuSeqCtl_tiny.ui;kohzuSeqCtl.ui;kohzuSeqCtl_All.ui;vdcm.ui;scanParms.ui;scanParms.ui;scanParms.ui</string>
              </property>
              <property name="args">
-              <string>P=4idVDCM:,mTH=m9,mY1=m10,mZ2=m11,mCHI2=m12,mTH2=m13,mX=m14,mY=m15,mX2=m16,QE=BraggE,PVE=BraggEAO,QL=BraggLambda,PVL=BraggLambdaAO,QTh=BraggTheta,PVTh=BraggThetaAO;P=4idVDCM:,mTH=m9,mY2=m10,mZ2=m11,mCHI2=m12,mTH2=m13,mX=m14,mY=m15,mX2=m16,QE=BraggE,PVE=BraggEAO,QL=BraggLambda,PVL=BraggLambdaAO,QTh=BraggTheta,PVTh=BraggThetaAO;P=4idVDCM:;P=4idVDCM:;P=4idVDCM:;P=4idVDCM:,Q=BraggE,PV=BraggEAO;P=4idVDCM:,Q=BraggTheta,PV=BraggThetaAO;P=4idVDCM:,Q=BraggLambda,PV=BraggLambdaAO</string>
+              <string>P=4idVDCM:,mTH=m9,mY1=m10,mZ2=m11,mCHI2=m12,mTH2=m13,mX=m14,mY=m15,mX2=m16,QE=BraggE,PVE=BraggEAO,QL=BraggLambda,PVL=BraggLambdaAO,QTh=BraggTheta,PVTh=BraggThetaAO;P=4idVDCM:,mTH=m9,mY2=m10,mZ2=m11,mCHI2=m12,mTH2=m13,mX=m14,mY=m15,mX2=m16,QE=BraggE,PVE=BraggEAO,QL=BraggLambda,PVL=BraggLambdaAO,QTh=BraggTheta,PVTh=BraggThetaAO;P=4idVDCM:;P=4idVDCM:;P=4idVDCM:;P=4idVDCM:,M_BRAGG=m1,M_X=m2,M_Y=m3,M_ROLL=m4,M_PITCH=m5;P=4idVDCM:,Q=BraggE,PV=BraggEAO;P=4idVDCM:,Q=BraggTheta,PV=BraggThetaAO;P=4idVDCM:,Q=BraggLambda,PV=BraggLambdaAO</string>
              </property>
              <property name="stackingMode" stdset="0">
               <enum>caRowColMenu::Menu</enum>
