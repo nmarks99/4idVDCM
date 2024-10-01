@@ -1,0 +1,7 @@
+# VMAS - White beam HHL slits
+iocshLoad("iocsh/vmas.iocsh", "P=$(PREFIX),S=Slit1,HORIZONTAL=m9,DIAGONAL=m10,PITCH=m11,YAW=m12")
+
+# Mono JJ slit
+dbLoadRecords("$(OPTICS)/opticsApp/Db/2slit.db","P=$(PREFIX),SLIT=Slit2V:,mXp=m14,mXn=m13")
+dbLoadRecords("$(OPTICS)/opticsApp/Db/2slit.db","P=$(PREFIX),SLIT=Slit2H:,mXp=m16,mXn=m15")
+

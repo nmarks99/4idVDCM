@@ -56,7 +56,7 @@
 ######################################################################
 
 # Load ACS support, it is build as a standalone module
-iocshLoad("$(MOTOR_ACSMOTION)/iocsh/ACS_Motion_tcp.iocsh", "INSTANCE=ACS1,IP_ADDR=164.54.115.16,NUM_AXES=5,IDLE_POLL=0.2")
+iocshLoad("$(MOTOR_ACSMOTION)/iocsh/ACS_Motion_tcp.iocsh", "INSTANCE=ACS1,IP_ADDR=164.54.115.16,NUM_AXES=16,IDLE_POLL=0.2,MOVING_POLL=0.05")
 
 # Load motor records
 dbLoadTemplate("substitutions/AcsMotion_mono.substitutions","P=$(PREFIX)")
@@ -126,3 +126,10 @@ doAfterIocInit("dbpf('$(PREFIX)SiPosition','27.5')")
 doAfterIocInit("dbpf('$(PREFIX)SiCPosition','1.0')")
 doAfterIocInit("dbpf('$(PREFIX)SiPosition.DISP','1')") # disable put
 doAfterIocInit("dbpf('$(PREFIX)SiCPosition.DISP','1')")
+
+# Set use enable = YES
+doAfterIocInit("dbpf('$(PREFIX)m1.CNEN','1')")
+doAfterIocInit("dbpf('$(PREFIX)m2.CNEN','1')")
+doAfterIocInit("dbpf('$(PREFIX)m3.CNEN','1')")
+doAfterIocInit("dbpf('$(PREFIX)m4.CNEN','1')")
+doAfterIocInit("dbpf('$(PREFIX)m5.CNEN','1')")

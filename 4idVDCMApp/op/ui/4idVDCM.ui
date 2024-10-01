@@ -846,7 +846,7 @@ QWidget[Fill=&quot;True&quot;] { background: rgba(0,0,0,0); }</string>
            <property name="margin">
             <number>10</number>
            </property>
-           <item row="2" column="1">
+           <item row="3" column="1">
             <widget class="caRelatedDisplay" name="carelateddisplay_45">
              <property name="label">
               <string notr="true">- XIA PFCU  </string>
@@ -879,7 +879,7 @@ QWidget[Fill=&quot;True&quot;] { background: rgba(0,0,0,0); }</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="3">
+           <item row="3" column="3">
             <widget class="caRelatedDisplay" name="carelateddisplay_51">
              <property name="label">
               <string notr="true">- XIA Slit  </string>
@@ -912,31 +912,7 @@ QWidget[Fill=&quot;True&quot;] { background: rgba(0,0,0,0); }</string>
              </property>
             </widget>
            </item>
-           <item row="3" column="3">
-            <widget class="caRelatedDisplay" name="carelateddisplay_52">
-             <property name="label">
-              <string notr="true">-</string>
-             </property>
-             <property name="foreground">
-              <color>
-               <red>228</red>
-               <green>228</green>
-               <blue>228</blue>
-              </color>
-             </property>
-             <property name="background">
-              <color>
-               <red>53</red>
-               <green>132</green>
-               <blue>0</blue>
-              </color>
-             </property>
-             <property name="stackingMode" stdset="0">
-              <enum>caRowColMenu::Menu</enum>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
+           <item row="2" column="1">
             <widget class="caRelatedDisplay" name="carelateddisplay_44">
              <property name="label">
               <string notr="true">-User Filter</string>
@@ -969,7 +945,7 @@ QWidget[Fill=&quot;True&quot;] { background: rgba(0,0,0,0); }</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="2">
+           <item row="2" column="2">
             <widget class="caRelatedDisplay" name="carelateddisplay_47">
              <property name="label">
               <string notr="true">-   EPID   </string>
@@ -1002,7 +978,7 @@ QWidget[Fill=&quot;True&quot;] { background: rgba(0,0,0,0); }</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="0">
+           <item row="3" column="0">
             <widget class="caRelatedDisplay" name="caRelatedDisplay_37">
              <property name="font">
               <font>
@@ -1043,7 +1019,7 @@ QWidget[Fill=&quot;True&quot;] { background: rgba(0,0,0,0); }</string>
              </property>
             </widget>
            </item>
-           <item row="3" column="2">
+           <item row="5" column="2">
             <widget class="caRelatedDisplay" name="carelateddisplay_49">
              <property name="label">
               <string notr="true">-</string>
@@ -1067,40 +1043,7 @@ QWidget[Fill=&quot;True&quot;] { background: rgba(0,0,0,0); }</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="3">
-            <widget class="caRelatedDisplay" name="carelateddisplay_50">
-             <property name="label">
-              <string notr="true">-  Slit #2  </string>
-             </property>
-             <property name="foreground">
-              <color>
-               <red>228</red>
-               <green>228</green>
-               <blue>228</blue>
-              </color>
-             </property>
-             <property name="background">
-              <color>
-               <red>53</red>
-               <green>132</green>
-               <blue>0</blue>
-              </color>
-             </property>
-             <property name="labels">
-              <string>Slit 2 (H) (soft);Slit 2 (V) (soft);Slit 2 Graphic (soft)</string>
-             </property>
-             <property name="files">
-              <string>2slit_soft.ui;2slit_soft.ui;4slitGraphic_soft.ui</string>
-             </property>
-             <property name="args">
-              <string>P=4idVDCM:,SLIT=Slit2H,mXp=m15,mXn=m16;P=4idVDCM:,SLIT=Slit2V,mXp=m13,mXn=m14;P=4idVDCM:,SLIT=Slit_2,H=Slit2H,mXp=m15,mXn=m16,V=Slit2V,mYp=m13,mYn=m14</string>
-             </property>
-             <property name="stackingMode" stdset="0">
-              <enum>caRowColMenu::Menu</enum>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="2">
+           <item row="3" column="2">
             <widget class="caRelatedDisplay" name="carelateddisplay_48">
              <property name="label">
               <string notr="true">-</string>
@@ -1121,47 +1064,6 @@ QWidget[Fill=&quot;True&quot;] { background: rgba(0,0,0,0); }</string>
              </property>
              <property name="stackingMode" stdset="0">
               <enum>caRowColMenu::Menu</enum>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="caRelatedDisplay" name="caRelatedDisplay_9">
-             <property name="font">
-              <font>
-               <family>Liberation Mono</family>
-              </font>
-             </property>
-             <property name="label">
-              <string notr="true">- HR Mono   </string>
-             </property>
-             <property name="foreground">
-              <color>
-               <red>228</red>
-               <green>228</green>
-               <blue>228</blue>
-              </color>
-             </property>
-             <property name="background">
-              <color>
-               <red>53</red>
-               <green>132</green>
-               <blue>0</blue>
-              </color>
-             </property>
-             <property name="labels">
-              <string>High resolution monochromator (nested);High resolution monochromator (symmetric);High resolution monochromator control</string>
-             </property>
-             <property name="files">
-              <string>hr_nested.ui;hr_symmetric.ui;hrSeqCtl_All.ui</string>
-             </property>
-             <property name="args">
-              <string>P=4idVDCM:,N=1;P=4idVDCM:,N=1;P=4idVDCM:,N=1</string>
-             </property>
-             <property name="stackingMode" stdset="0">
-              <enum>caRowColMenu::Menu</enum>
-             </property>
-             <property name="removeParent" stdset="0">
-              <string>false;false;false</string>
              </property>
             </widget>
            </item>
@@ -1206,7 +1108,48 @@ QWidget[Fill=&quot;True&quot;] { background: rgba(0,0,0,0); }</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="0">
+           <item row="5" column="0">
+            <widget class="caRelatedDisplay" name="caRelatedDisplay_9">
+             <property name="font">
+              <font>
+               <family>Liberation Mono</family>
+              </font>
+             </property>
+             <property name="label">
+              <string notr="true">- HR Mono   </string>
+             </property>
+             <property name="foreground">
+              <color>
+               <red>228</red>
+               <green>228</green>
+               <blue>228</blue>
+              </color>
+             </property>
+             <property name="background">
+              <color>
+               <red>53</red>
+               <green>132</green>
+               <blue>0</blue>
+              </color>
+             </property>
+             <property name="labels">
+              <string>High resolution monochromator (nested);High resolution monochromator (symmetric);High resolution monochromator control</string>
+             </property>
+             <property name="files">
+              <string>hr_nested.ui;hr_symmetric.ui;hrSeqCtl_All.ui</string>
+             </property>
+             <property name="args">
+              <string>P=4idVDCM:,N=1;P=4idVDCM:,N=1;P=4idVDCM:,N=1</string>
+             </property>
+             <property name="stackingMode" stdset="0">
+              <enum>caRowColMenu::Menu</enum>
+             </property>
+             <property name="removeParent" stdset="0">
+              <string>false;false;false</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
             <widget class="caRelatedDisplay" name="caRelatedDisplay_7">
              <property name="font">
               <font>
@@ -1250,7 +1193,7 @@ QWidget[Fill=&quot;True&quot;] { background: rgba(0,0,0,0); }</string>
              </property>
             </widget>
            </item>
-           <item row="3" column="4">
+           <item row="5" column="4">
             <widget class="caRelatedDisplay" name="carelateddisplay_56">
              <property name="label">
               <string notr="true">-</string>
@@ -1365,47 +1308,6 @@ QWidget[Fill=&quot;True&quot;] { background: rgba(0,0,0,0); }</string>
              </property>
             </widget>
            </item>
-           <item row="0" column="3">
-            <widget class="caRelatedDisplay" name="caRelatedDisplay_32">
-             <property name="font">
-              <font>
-               <family>Liberation Mono</family>
-              </font>
-             </property>
-             <property name="label">
-              <string notr="true">-  Slit #1  </string>
-             </property>
-             <property name="foreground">
-              <color>
-               <red>228</red>
-               <green>228</green>
-               <blue>228</blue>
-              </color>
-             </property>
-             <property name="background">
-              <color>
-               <red>53</red>
-               <green>132</green>
-               <blue>0</blue>
-              </color>
-             </property>
-             <property name="labels">
-              <string>Slit 1 (H);Slit 1 (V);Slit 1 Graphic;Slit Motors</string>
-             </property>
-             <property name="files">
-              <string>2slit.ui;2slit.ui;4slitGraphic.ui;motor4x.ui</string>
-             </property>
-             <property name="args">
-              <string>P=4idVDCM:,SLIT=Slit1H,mXp=m5,mXn=m6;P=4idVDCM:,SLIT=Slit1V,mXp=m3,mXn=m4;P=4idVDCM:,SLIT=Slit_1,H=Slit1H,mXp=m3,mXn=m4,V=Slit1V,mYp=m5,mYn=m6;P=4idVDCM:,M1=m3,M2=m4,M3=m5,M4=m6</string>
-             </property>
-             <property name="stackingMode" stdset="0">
-              <enum>caRowColMenu::Menu</enum>
-             </property>
-             <property name="removeParent" stdset="0">
-              <string>false;false;false;false;false;false;false;false;false</string>
-             </property>
-            </widget>
-           </item>
            <item row="0" column="4">
             <widget class="caRelatedDisplay" name="caRelatedDisplay_0">
              <property name="font">
@@ -1447,7 +1349,7 @@ QWidget[Fill=&quot;True&quot;] { background: rgba(0,0,0,0); }</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="4">
+           <item row="2" column="4">
             <widget class="caRelatedDisplay" name="caRelatedDisplay_8">
              <property name="font">
               <font>
@@ -1488,7 +1390,7 @@ QWidget[Fill=&quot;True&quot;] { background: rgba(0,0,0,0); }</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="4">
+           <item row="3" column="4">
             <widget class="caRelatedDisplay" name="caRelatedDisplay_18">
              <property name="font">
               <font>
@@ -1529,7 +1431,7 @@ QWidget[Fill=&quot;True&quot;] { background: rgba(0,0,0,0); }</string>
              </property>
             </widget>
            </item>
-           <item row="3" column="1">
+           <item row="5" column="1">
             <widget class="caRelatedDisplay" name="caRelatedDisplay_29">
              <property name="font">
               <font>
@@ -1567,6 +1469,113 @@ QWidget[Fill=&quot;True&quot;] { background: rgba(0,0,0,0); }</string>
              </property>
              <property name="removeParent" stdset="0">
               <string>false</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="3">
+            <widget class="caRelatedDisplay" name="carelateddisplay_52">
+             <property name="label">
+              <string notr="true">- WB Slit   </string>
+             </property>
+             <property name="foreground">
+              <color>
+               <red>228</red>
+               <green>228</green>
+               <blue>228</blue>
+              </color>
+             </property>
+             <property name="background">
+              <color>
+               <red>53</red>
+               <green>132</green>
+               <blue>0</blue>
+              </color>
+             </property>
+             <property name="labels">
+              <string>slit;calibration</string>
+             </property>
+             <property name="files">
+              <string>maskApertureSlit.ui;maskApertureSlit_calibration.ui</string>
+             </property>
+             <property name="args">
+              <string>P=4idVDCM:,SLITS=Slit1,HOR=m9,DIAG=m10,PITCH=m11,YAW=m12;P=4idVDCM:,SLITS=Slit1,HOR=m9,DIAG=m10,PITCH=m11,YAW=m12</string>
+             </property>
+             <property name="stackingMode" stdset="0">
+              <enum>caRowColMenu::Menu</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="3">
+            <widget class="caRelatedDisplay" name="caRelatedDisplay_32">
+             <property name="font">
+              <font>
+               <family>Liberation Mono</family>
+              </font>
+             </property>
+             <property name="label">
+              <string notr="true">- Mono JJ Slit </string>
+             </property>
+             <property name="foreground">
+              <color>
+               <red>228</red>
+               <green>228</green>
+               <blue>228</blue>
+              </color>
+             </property>
+             <property name="background">
+              <color>
+               <red>53</red>
+               <green>132</green>
+               <blue>0</blue>
+              </color>
+             </property>
+             <property name="labels">
+              <string>Slit 1 Graphic;Slit Motors;Slit 1 (H);Slit 1 (V)</string>
+             </property>
+             <property name="files">
+              <string>4slitGraphic.ui;motor4x.ui;2slit.ui;2slit.ui</string>
+             </property>
+             <property name="args">
+              <string>P=4idVDCM:,SLIT=Mono JJ Slit,H=Slit2H:,mXp=m16,mXn=m15,V=Slit2V:,mYp=m14,mYn=m13;P=4idVDCM:,M1=m13,M2=m14,M3=m15,M4=m16;P=4idVDCM:,SLIT=Slit2H:,mXp=m16,mXn=m15;P=4idVDCM:,SLIT=Slit2V:,mXp=m14,mXn=m13</string>
+             </property>
+             <property name="stackingMode" stdset="0">
+              <enum>caRowColMenu::Menu</enum>
+             </property>
+             <property name="removeParent" stdset="0">
+              <string>false;false;false;false;false;false;false;false;false</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="3">
+            <widget class="caRelatedDisplay" name="carelateddisplay_50">
+             <property name="label">
+              <string notr="true">-   Slit   </string>
+             </property>
+             <property name="foreground">
+              <color>
+               <red>228</red>
+               <green>228</green>
+               <blue>228</blue>
+              </color>
+             </property>
+             <property name="background">
+              <color>
+               <red>53</red>
+               <green>132</green>
+               <blue>0</blue>
+              </color>
+             </property>
+             <property name="labels">
+              <string>Slit 2 (H) (soft);Slit 2 (V) (soft);Slit 2 Graphic (soft)</string>
+             </property>
+             <property name="files">
+              <string>2slit_soft.ui;2slit_soft.ui;4slitGraphic_soft.ui</string>
+             </property>
+             <property name="args">
+              <string>P=4idVDCM:,SLIT=Slit2H,mXp=m16,mXn=m15;P=4idVDCM:,SLIT=Slit2V,mXp=m14,mXn=m13;P=4idVDCM:,SLIT=Mono Slit,H=Slit2H,mXp=m16,mXn=m15,V=Slit2V,mYp=m14,mYn=m13</string>
+             </property>
+             <property name="stackingMode" stdset="0">
+              <enum>caRowColMenu::Menu</enum>
              </property>
             </widget>
            </item>

@@ -1,12 +1,23 @@
 file "$(MOTOR)/db/asyn_motor.db"
 {
 pattern
-{N,  M,        DTYP,         PORT,  ADDR,          DESC,    EGU,  DIR,  VELO,  VBAS,   ACCL,  BDST,   BVEL,   BACC,  MRES,             PREC,  DHLM,   DLLM,  INIT, RTSM, RTRY}
-{1,  "m$(N)",  "asynMotor",  ACS1,  0,    "Bragg Angle",    deg,  Pos,  0.10,  0.0001,  0.1,     0,      1,    0.2,  -5.72957795e-07,  4,     1000,  -1000,    "", "Never", 0}
-{2,  "m$(N)",  "asynMotor",  ACS1,  1, "Crystal Select",     mm,  Pos,  0.10,  0.0001,  0.1,     0,      1,    0.2,  0.00005,          4,     1000,  -1000,    "", "Never", 0}
-{3,  "m$(N)",  "asynMotor",  ACS1,  2,    "Crystal Gap",     mm,  Pos,  0.10,  0.0001,  0.1,     0,      1,    0.2,  0.00005,          4,     1000,  -1000,    "", "Never", 0}
-{4,  "m$(N)",  "asynMotor",  ACS1,  3, "Coarse Pitch 2",    deg,  Pos,  0.08,  0.0001,  0.1,     0,      1,    0.2,  3.9184953e-6,     4,     1000,  -1000,    "", "Never", 0}
-{5,  "m$(N)",  "asynMotor",  ACS1,  4,  "Coarse Roll 2",   mrad,  Pos,  0.1,     0.01,  0.1,     0,      1,    0.2,  0.00002677,       4,     1000,  -1000,    "", "Never", 0}
+{N,  M,        DTYP,         PORT,  ADDR,          DESC,    EGU,  DIR,  VELO,  VBAS,   ACCL,  BDST,   BVEL,   BACC,  MRES,            ERES,            PREC,  DHLM,   DLLM,  INIT, RTSM, RTRY}
+{1,  "m$(N)",  "asynMotor",  ACS1,  0,    "Bragg Angle",    deg,  Pos,  0.10,  0.0001,  0.1,     0,      1,    0.2,  -5.72957795e-07, -5.72957795e-07,    4,     1000,  -1000,    "", "Never", 0}
+{2,  "m$(N)",  "asynMotor",  ACS1,  1, "Crystal Select",     mm,  Pos,  0.10,  0.0001,  0.1,     0,      1,    0.2,  0.00005,         0.00005,            4,     1000,  -1000,    "", "Never", 0}
+{3,  "m$(N)",  "asynMotor",  ACS1,  2,    "Crystal Gap",     mm,  Pos,  0.10,  0.0001,  0.1,     0,      1,    0.2,  0.00005,         0.00005,            4,     1000,  -1000,    "", "Never", 0}
+{4,  "m$(N)",  "asynMotor",  ACS1,  3, "Coarse Pitch 2",    deg,  Pos,  0.08,  0.0001,  0.1,     0,      1,    0.2,  3.9184953e-6,    3.9184953e-6,       4,     1000,  -1000,    "", "Never", 0}
+{5,  "m$(N)",  "asynMotor",  ACS1,  4,  "Coarse Roll 2",   mrad,  Pos,   0.1,    0.01,  0.1,     0,      1,    0.2,  0.00002677,      0.00002677,         4,     1000,  -1000,    "", "Never", 0}
+{6,  "m$(N)",  "asynMotor",  ACS1,  5,  "Flag Upstream",     mm,  Pos,   2.0,     0.2,  0.1,     0,      2,    0.1,  0.00005,         0.00005,            4,     1000,  -1000,    "", "Never", 0}
+{7,  "m$(N)",  "asynMotor",  ACS1,  6,"Flag Downstream",     mm,  Pos,   2.0,     0.2,  0.1,     0,      2,    0.1,  0.00005,         0.00005,            4,     1000,  -1000,    "", "Never", 0}
+{8,  "m$(N)",  "asynMotor",  ACS1,  7,          "Spare",     mm,  Pos,   0.1,     0.1,  0.1,     0,      1,    0.2,  0.00005,         0.00005,            4,     1000,  -1000,    "", "Never", 0}
+{9,  "m$(N)",  "asynMotor",  ACS1,  8,  "WB Horizontal",     mm,  Pos,   2.0,     0.2,  0.1,     0,      2,    0.1,  0.000005,        0.000005,           4,     1000,  -1000,    "", "Never", 0}
+{10, "m$(N)",  "asynMotor",  ACS1,  9,    "WB Diagonal",     mm,  Pos,   2.0,     0.2,  0.1,     0,      2,    0.1,  0.000005,        0.000005,           4,     1000,  -1000,    "", "Never", 0}
+{11, "m$(N)",  "asynMotor",  ACS1, 10,       "WB Pitch",     mm,  Pos,   2.0,     0.2,  0.1,     0,      2,    0.1,  0.000005,        0.000005,           4,     1000,  -1000,    "", "Never", 0}
+{12, "m$(N)",  "asynMotor",  ACS1, 11,         "WB Yaw",     mm,  Pos,   2.0,     0.2,  0.1,     0,      2,    0.1,  0.000005,        0.000005,           4,     1000,  -1000,    "", "Never", 0}
+{13, "m$(N)",  "asynMotor",  ACS1, 12, "Mono Slit Down",     mm,  Pos,   0.8,     0.5, 0.07,     0,    0.8,   0.07,  0.000005,        0.000005,           4,     1000,  -1000,    "", "Never", 0}
+{14, "m$(N)",  "asynMotor",  ACS1, 13,  "Mono Slit Top",     mm,  Pos,   0.8,     0.5, 0.07,     0,    0.8,   0.07,  0.000005,        0.000005,           4,     1000,  -1000,    "", "Never", 0}
+{15, "m$(N)",  "asynMotor",  ACS1, 14,   "Mono Slit In",     mm,  Pos,   0.8,     0.5, 0.07,     0,    0.8,   0.07,  0.000005,        0.000005,           4,     1000,  -1000,    "", "Never", 0}
+{16, "m$(N)",  "asynMotor",  ACS1, 15,  "Mono Slit Out",     mm,  Pos,   0.8,     0.5, 0.07,     0,    0.8,   0.07,  0.000005,        0.000005,           4,     1000,  -1000,    "", "Never", 0}
 }
 
 ### The feedback database is helpful for troubleshooting encoder problems
@@ -19,6 +30,17 @@ pattern
 {m3,  ACS1,    2,    6,    2}
 {m4,  ACS1,    3,    6,    2}
 {m5,  ACS1,    4,    6,    2}
+{m6,  ACS1,    5,    6,    2}
+{m7,  ACS1,    6,    6,    2}
+{m8,  ACS1,    7,    6,    2}
+{m9,  ACS1,    8,    6,    2}
+{m10,  ACS1,   9,    6,    2}
+{m11,  ACS1,  10,    6,    2}
+{m12,  ACS1,  11,    6,    2}
+# {m13,  ACS1,  12,    6,    2}
+{m14,  ACS1,  13,    6,    2}
+{m15,  ACS1,  14,    6,    2}
+{m16,  ACS1,  15,    6,    2}
 }
 
 ### Disable setting the position for axes with absolute encoders
@@ -26,9 +48,20 @@ file "$(MOTOR_ACSMOTION)/db/SPiiPlusDisableSetPos.db"
 {
 pattern
 {M,   PORT, ADDR}
-{m1,  ACS1,    0}
-{m2,  ACS1,    1}
-{m3,  ACS1,    2}
-{m4,  ACS1,    3}
-{m5,  ACS1,    4}
+{ m1,  ACS1,    0}
+{ m2,  ACS1,    1}
+{ m3,  ACS1,    2}
+{ m4,  ACS1,    3}
+{ m5,  ACS1,    4}
+{ m6,  ACS1,    5}
+{ m7,  ACS1,    6}
+{ m8,  ACS1,    7}
+{ m9,  ACS1,    8}
+{m10,  ACS1,    9}
+{m11,  ACS1,   10}
+{m12,  ACS1,   11}
+# {m13,  ACS1,   12}
+{m14,  ACS1,   13}
+{m15,  ACS1,   14}
+{m16,  ACS1,   15}
 }
