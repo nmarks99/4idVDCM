@@ -5,10 +5,10 @@ file {
 }
 display {
 	object {
-		x=1730
-		y=1231
-		width=197
-		height=131
+		x=1380
+		y=1437
+		width=350
+		height=225
 	}
 	clr=14
 	bclr=4
@@ -89,9 +89,9 @@ display {
 }
 "text entry" {
 	object {
-		x=45
-		y=60
-		width=100
+		x=65
+		y=95
+		width=80
 		height=20
 	}
 	control {
@@ -104,9 +104,9 @@ display {
 }
 "text entry" {
 	object {
-		x=45
-		y=95
-		width=100
+		x=65
+		y=170
+		width=80
 		height=20
 	}
 	control {
@@ -119,21 +119,8 @@ display {
 }
 text {
 	object {
-		x=45
-		y=35
-		width=100
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Position"
-	align="horiz. centered"
-}
-text {
-	object {
-		x=5
-		y=60
+		x=15
+		y=95
 		width=30
 		height=20
 	}
@@ -145,8 +132,8 @@ text {
 }
 text {
 	object {
-		x=5
-		y=95
+		x=15
+		y=170
 		width=30
 		height=20
 	}
@@ -171,33 +158,173 @@ text {
 	limits {
 	}
 }
-"message button" {
+"text update" {
 	object {
-		x=150
-		y=60
-		width=35
-		height=20
+		x=65
+		y=55
+		width=80
+		height=15
 	}
-	control {
-		chan="$(P)MoveToSi.PROC"
-		clr=14
-		bclr=51
+	monitor {
+		chan="$(P)$(M_X).EGU"
+		clr=54
+		bclr=3
 	}
-	label="Go"
-	press_msg="1"
+	align="horiz. centered"
+	limits {
+	}
 }
-"message button" {
+"text entry" {
 	object {
-		x=150
-		y=95
-		width=35
+		x=225
+		y=80
+		width=75
 		height=20
 	}
 	control {
-		chan="$(P)MoveToSiC.PROC"
+		chan="$(P)BraggHLM_Si"
 		clr=14
 		bclr=51
 	}
-	label="Go"
-	press_msg="1"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=225
+		y=110
+		width=75
+		height=20
+	}
+	control {
+		chan="$(P)BraggLLM_Si"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=225
+		y=155
+		width=75
+		height=20
+	}
+	control {
+		chan="$(P)BraggHLM_SiC"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=225
+		y=55
+		width=75
+		height=15
+	}
+	monitor {
+		chan="$(P)$(M_BRAGG).EGU"
+		clr=54
+		bclr=3
+	}
+	align="horiz. centered"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=225
+		y=185
+		width=75
+		height=20
+	}
+	control {
+		chan="$(P)BraggLLM_SiC"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=65
+		y=35
+		width=80
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Position"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=205
+		y=35
+		width=120
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Bragg Limits"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=180
+		y=80
+		width=40
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="High"
+	align="horiz. right"
+}
+text {
+	object {
+		x=180
+		y=110
+		width=40
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Low"
+	align="horiz. right"
+}
+text {
+	object {
+		x=180
+		y=185
+		width=40
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Low"
+	align="horiz. right"
+}
+text {
+	object {
+		x=180
+		y=155
+		width=40
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="High"
+	align="horiz. right"
 }

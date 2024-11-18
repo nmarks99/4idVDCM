@@ -56,7 +56,6 @@
 ######################################################################
 
 # Load ACS support, it is build as a standalone module
-# iocshLoad("$(MOTOR_ACSMOTION)/iocsh/ACS_Motion_tcp.iocsh", "INSTANCE=ACS1,IP_ADDR=164.54.115.16,NUM_AXES=16,IDLE_POLL=0.2,MOVING_POLL=0.05")
 iocshLoad("$(MOTOR_ACSMOTION)/iocsh/ACS_Motion_tcp.iocsh", "INSTANCE=ACS1,IP_ADDR=10.54.115.16,NUM_AXES=16,IDLE_POLL=0.2,MOVING_POLL=0.01")
 
 # Load motor records
@@ -78,17 +77,15 @@ doAfterIocInit('dbpf("$(PREFIX)Kohzu_yOffsetAO", "15.7")')
 # Much of the below isn't needed once autosave is enabled
 
 ## Bragg angle ##
-# TODO: E_AOFFS in the ACS controller instead?
 doAfterIocInit("dbpf('$(PREFIX)m1.ERES','-5.72957795e-07')") # ERES=EFAC*conversion factor
 doAfterIocInit("dbpf('$(PREFIX)m1.OFF','101.26886969629788')") # to match dial indicator
 doAfterIocInit("dbpf('$(PREFIX)m1.FOFF','1')") # frozen offset
-# doAfterIocInit("dbpf('$(PREFIX)m1.MDEL','0.00001')") # increase monitor deadband
 doAfterIocInit("dbpf('$(PREFIX)m1.VMAX','0.4')") # max velocity deg/s
 
 ## Crystal Selection ##
 doAfterIocInit("dbpf('$(PREFIX)m2.ERES','0.00005')") # ERES = EFAC
-doAfterIocInit("dbpf('$(PREFIX)m2.OFF','-55.0')") # zero at left limit
-doAfterIocInit("dbpf('$(PREFIX)m2.FOFF','1')") # frozen offset
+# doAfterIocInit("dbpf('$(PREFIX)m2.OFF','-55.0')") # zero at left limit
+# doAfterIocInit("dbpf('$(PREFIX)m2.FOFF','1')") # frozen offset
 doAfterIocInit("dbpf('$(PREFIX)m2.VMAX','1.0')") # max velocity mm/s
 
 ## Crystal Gap ##
@@ -101,36 +98,29 @@ doAfterIocInit("dbpf('$(PREFIX)m2.VMAX','1.0')") # max velocity mm/s
 
 ## Course Pitch ## 
 doAfterIocInit("dbpf('$(PREFIX)m4.ERES','3.9184953e-6')") # converted to mrad
-doAfterIocInit("dbpf('$(PREFIX)m4.OFF','-99.1665')") # centered between limits
-doAfterIocInit("dbpf('$(PREFIX)m4.FOFF','1')") # frozen
+# doAfterIocInit("dbpf('$(PREFIX)m4.OFF','-99.1665')") # centered between limits
+# doAfterIocInit("dbpf('$(PREFIX)m4.FOFF','1')") # frozen
 doAfterIocInit("dbpf('$(PREFIX)m4.VMAX','0.17')") # max velocity mrad/s
 doAfterIocInit("dbpf('$(PREFIX)m4.HLM','5.2')")
 doAfterIocInit("dbpf('$(PREFIX)m4.LLM','-5.2')")
 
 ## Course Roll ##
 doAfterIocInit("dbpf('$(PREFIX)m5.ERES','0.00002677')") # converted to mrad
-doAfterIocInit("dbpf('$(PREFIX)m5.OFF','2.1')") # centered between limits
-doAfterIocInit("dbpf('$(PREFIX)m5.FOFF','1')") # frozen
+# doAfterIocInit("dbpf('$(PREFIX)m5.OFF','2.1')") # centered between limits
+# doAfterIocInit("dbpf('$(PREFIX)m5.FOFF','1')") # frozen
 doAfterIocInit("dbpf('$(PREFIX)m5.VMAX','0.4')") # mrad/s
 doAfterIocInit("dbpf('$(PREFIX)m5.HLM','7.5')")
 doAfterIocInit("dbpf('$(PREFIX)m5.LLM','-11.7')")
 
-# Set use encoder = YES
-doAfterIocInit("dbpf('$(PREFIX)m1.UEIP','1')")
-doAfterIocInit("dbpf('$(PREFIX)m2.UEIP','1')")
-doAfterIocInit("dbpf('$(PREFIX)m3.UEIP','1')")
-doAfterIocInit("dbpf('$(PREFIX)m4.UEIP','1')")
-doAfterIocInit("dbpf('$(PREFIX)m5.UEIP','1')")
-
 # Define the crystal locations
 doAfterIocInit("dbpf('$(PREFIX)SiPosition','27.5')")
 doAfterIocInit("dbpf('$(PREFIX)SiCPosition','1.0')")
-doAfterIocInit("dbpf('$(PREFIX)SiPosition.DISP','1')") # disable put
-doAfterIocInit("dbpf('$(PREFIX)SiCPosition.DISP','1')")
+# doAfterIocInit("dbpf('$(PREFIX)SiPosition.DISP','1')") # disable put
+# doAfterIocInit("dbpf('$(PREFIX)SiCPosition.DISP','1')")
 
-# Set use enable = YES
-# doAfterIocInit("dbpf('$(PREFIX)m1.CNEN','1')")
-# doAfterIocInit("dbpf('$(PREFIX)m2.CNEN','1')")
-# doAfterIocInit("dbpf('$(PREFIX)m3.CNEN','1')")
-# doAfterIocInit("dbpf('$(PREFIX)m4.CNEN','1')")
-# doAfterIocInit("dbpf('$(PREFIX)m5.CNEN','1')")
+# # Set use encoder = YES
+# doAfterIocInit("dbpf('$(PREFIX)m1.UEIP','1')")
+# doAfterIocInit("dbpf('$(PREFIX)m2.UEIP','1')")
+# doAfterIocInit("dbpf('$(PREFIX)m3.UEIP','1')")
+# doAfterIocInit("dbpf('$(PREFIX)m4.UEIP','1')")
+# doAfterIocInit("dbpf('$(PREFIX)m5.UEIP','1')")

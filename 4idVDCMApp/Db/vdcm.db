@@ -1,47 +1,76 @@
-# Disable X axis if Bragg angle is not in [45, 50deg] or FE shutter is open
-# TODO: test shutter
-record(calcout, "$(P)disable_crystal_select_calc") {
-    field(INPA, "$(P)$(M_BRAGG).RBV CP")
-    field(INPB, "PA:04ID:A_BEAM_PRESENT CP")
-    field(CALC, "((A <= 45) || (A >= 50)) || B")
-    field(OUT, "$(P)$(M_X)_able.VAL PP")
+# Soft limits for Bragg axis depending on which crystal is selected
+record(ao, "$(P)BraggLLM_Si") {
+    field(DESC, "Bragg low limit for Si")
+    field(VAL, "3.5")
+    field(PREC, 2)
+}
+record(ao, "$(P)BraggHLM_Si") {
+    field(DESC, "Bragg high limit for Si")
+    field(VAL, "50")
+    field(PREC, 2)
+}
+record(ao, "$(P)BraggLLM_SiC") {
+    field(DESC, "Bragg low limit for SiC")
+    field(VAL, "45")
+    field(PREC, 2)
+}
+record(ao, "$(P)BraggHLM_SiC") {
+    field(DESC, "Bragg high limit for SiC")
+    field(VAL, "65")
+    field(PREC, 2)
 }
 
-# Determines the currently selected crystal and sets $(P)CurrentCrystal accordingly
-# TODO: CALC should use defined crystal positions
-record(calcout, "$(P)current_crystal_calc") {
-    field(INPA, "$(P)$(M_X).RBV CP")
-    field(INPB, "$(P)$(M_BRAGG).HLS CP")
-    field(INPC, "$(P)$(M_BRAGG).LLS CP")
-    field(CALC, "((A < 10) && !B && !C) ? 0 : ((A > 20) && !B && !C) ? 1 : 2")
-    field(OUT, "$(P)CurrentCrystal PP")
-    field(PINI, 1)
-}
-
-# The currently selected crystal
-record(mbbo, "$(P)CurrentCrystal") {
-    field(ZRST, "SiC") # ~1mm
-    field(ONST, "Si")  # ~27mm
-    field(TWST, "None")
-}
-
+# Crystal positions
 record(ao, "$(P)SiCPosition") {
     # ~1mm
     field(DESC, "Position of SiC crystal")
     field(PREC, 3)
 }
-
 record(ao, "$(P)SiPosition") {
     # ~27mm
     field(DESC, "Position of Si crystal")
     field(PREC, 3)
 }
 
+# Disable X axis if Bragg angle is not in [BraggLLM_SiC,BraggHLM_Si] or FE shutter is open
+record(calcout, "$(P)disable_crystal_select_calc") {
+    field(INPA, "$(P)$(M_BRAGG).RBV CP")
+    # field(INPB, "PA:04ID:A_BEAM_PRESENT CP") # FIX: PV not working in calc?
+    field(INPB, "0") 
+    field(INPC, "$(P)BraggLLM_SiC")
+    field(INPD, "$(P)BraggHLM_Si")
+    field(CALC, "(A < C) || (A > D) || B")
+    field(OUT, "$(P)$(M_X)_able.VAL PP")
+}
+
+# Determines the currently selected crystal and sets $(P)CurrentCrystal accordingly
+# Actual exposed crystal widths are 3mm and 4.5 mm. This calc just checks if the limits
+# of the Bragg axis aren't triggered and we're within 3mm of the crystal.
+record(calcout, "$(P)current_crystal_calc") {
+    field(INPA, "$(P)$(M_X).RBV CP")
+    field(INPB, "$(P)$(M_BRAGG).HLS CP")
+    field(INPC, "$(P)$(M_BRAGG).LLS CP")
+    field(INPD, "$(P)SiCPosition.VAL CP")
+    field(INPE, "$(P)SiPosition.VAL CP")
+    field(CALC, "((ABS(A - D) < 3) && !B && !C) ? 0 : ((ABS(A - E) < 3) && !B && !C) ? 1 : 2")
+    field(OUT, "$(P)CurrentCrystal PP")
+    field(PINI, 1)
+}
+
+# The currently selected crystal
+record(mbbo, "$(P)CurrentCrystal") {
+    field(ZRST, "SiC") # ~1mm when zero at left limit
+    field(ONST, "Si")  # ~27mm
+    field(TWST, "None")
+}
+
+# Moves crystal selection motor to Si position
 record(seq, "$(P)MoveToSi") {
     field(DOL0, "$(P)SiPosition.VAL")
     field(LNK0, "$(P)$(M_X).VAL")
 }
 
+# Moves crystal selection motor to SiC position
 record(seq, "$(P)MoveToSiC") {
     field(DOL0, "$(P)SiCPosition.VAL")
     field(LNK0, "$(P)$(M_X).VAL")
@@ -50,12 +79,17 @@ record(seq, "$(P)MoveToSiC") {
 # automatically set soft limits for the Bragg axis based on which crystal is selected
 record(calcout, "$(P)set_high_bragg_limit") {
     field(INPA, "$(P)CurrentCrystal.VAL CP")
-    field(CALC, "(A == 0) ? 65 : (A == 1) ? 50 : 0")
+    field(INPB, "$(P)BraggHLM_Si")
+    field(INPC, "$(P)BraggHLM_SiC")
+    field(CALC, "(A == 0) ? C : (A == 1) ? B : 0")
+    field(OOPT, "When Non-zero") # do change limits if in between crystals
     field(OUT, "$(P)$(M_BRAGG).HLM PP")
 }
-
 record(calcout, "$(P)set_low_bragg_limit") {
     field(INPA, "$(P)CurrentCrystal.VAL CP")
-    field(CALC, "(A == 0) ? 45 : (A == 1) ? 3.5 : 0")
+    field(INPB, "$(P)BraggLLM_Si")
+    field(INPC, "$(P)BraggLLM_SiC")
+    field(CALC, "(A == 0) ? C : (A == 1) ? B : 0")
+    field(OOPT, "When Non-zero") # do change limits if in between crystals
     field(OUT, "$(P)$(M_BRAGG).LLM PP")
 }

@@ -5,8 +5,8 @@ file {
 }
 display {
 	object {
-		x=788
-		y=1083
+		x=1450
+		y=1100
 		width=712
 		height=321
 	}
@@ -142,7 +142,7 @@ text {
 	object {
 		x=90
 		y=35
-		width=50
+		width=45
 		height=20
 	}
 	monitor {
@@ -2837,7 +2837,7 @@ text {
 	display[0] {
 		label="Selection"
 		name="crystal_select.adl"
-		args="P=$(P),M=$(M_X)"
+		args="P=$(P),M_X=$(M_X),M_BRAGG=$(M_BRAGG)"
 	}
 	clr=0
 	bclr=17
