@@ -1,0 +1,8 @@
+# Load ACS support. It is build as a standalone module
+iocshLoad("$(MOTOR_ACSMOTION)/iocsh/ACS_Motion_tcp.iocsh", "INSTANCE=ACS1,IP_ADDR=10.54.115.16,NUM_AXES=16,IDLE_POLL=0.2,MOVING_POLL=0.01")
+
+# Load motor records
+dbLoadTemplate("substitutions/AcsMotion.substitutions","P=$(PREFIX)")
+
+# Load an asyn record for debugging
+dbLoadRecords("$(ASYN)/db/asynRecord.db","P=$(PREFIX),R=ACS1_asyn,PORT=ACS1,ADDR=0,OMAX=256,IMAX=256")

@@ -55,15 +55,6 @@
 
 ######################################################################
 
-# Load ACS support, it is build as a standalone module
-iocshLoad("$(MOTOR_ACSMOTION)/iocsh/ACS_Motion_tcp.iocsh", "INSTANCE=ACS1,IP_ADDR=10.54.115.16,NUM_AXES=16,IDLE_POLL=0.2,MOVING_POLL=0.01")
-
-# Load motor records
-dbLoadTemplate("substitutions/AcsMotion_mono.substitutions","P=$(PREFIX)")
-
-# Load an asyn record for debugging
-dbLoadRecords("$(ASYN)/db/asynRecord.db","P=$(PREFIX),R=ACS1_asyn,PORT=ACS1,ADDR=0,OMAX=256,IMAX=256")
-
 # logic for crystal selection, bragg soft limits, etc.
 dbLoadRecords("$(TOP)/db/vdcm.db", "P=$(PREFIX), M_BRAGG=m1, M_X=m2")
 
@@ -71,10 +62,11 @@ dbLoadRecords("$(TOP)/db/vdcm.db", "P=$(PREFIX), M_BRAGG=m1, M_X=m2")
 dbLoadRecords("$(TOP)/db/Zdummy.db", "P=$(PREFIX), SM=Zdummy, M_BRAGG=m1, MRES=1e-6") # no real Z axis
 dbLoadRecords("$(OPTICS)/opticsApp/Db/kohzuSeq.db","P=$(PREFIX),M_THETA=m1,M_Y=m3,M_Z=Zdummy,yOffLo=4,yOffHi=36")
 doAfterIocInit('seq &kohzuCtl, "P=$(PREFIX), M_THETA=m1, M_Y=m3, M_Z=Zdummy, GEOM=2, logfile=kohzuCtl.log"')
-doAfterIocInit('dbpf("$(PREFIX)Kohzu_yOffsetAO", "15.7")')
+# doAfterIocInit('dbpf("$(PREFIX)Kohzu_yOffsetAO", "15.7")')
 
 ######################################################################
-# Much of the below isn't needed once autosave is enabled
+
+# Much of the below isn't needed and can instead rely on autosave
 
 ## Bragg angle ##
 doAfterIocInit("dbpf('$(PREFIX)m1.ERES','-5.72957795e-07')") # ERES=EFAC*conversion factor
@@ -112,15 +104,8 @@ doAfterIocInit("dbpf('$(PREFIX)m5.VMAX','0.4')") # mrad/s
 doAfterIocInit("dbpf('$(PREFIX)m5.HLM','7.5')")
 doAfterIocInit("dbpf('$(PREFIX)m5.LLM','-11.7')")
 
-# Define the crystal locations
-doAfterIocInit("dbpf('$(PREFIX)SiPosition','27.5')")
-doAfterIocInit("dbpf('$(PREFIX)SiCPosition','1.0')")
-# doAfterIocInit("dbpf('$(PREFIX)SiPosition.DISP','1')") # disable put
-# doAfterIocInit("dbpf('$(PREFIX)SiCPosition.DISP','1')")
-
-# # Set use encoder = YES
-# doAfterIocInit("dbpf('$(PREFIX)m1.UEIP','1')")
-# doAfterIocInit("dbpf('$(PREFIX)m2.UEIP','1')")
-# doAfterIocInit("dbpf('$(PREFIX)m3.UEIP','1')")
-# doAfterIocInit("dbpf('$(PREFIX)m4.UEIP','1')")
-# doAfterIocInit("dbpf('$(PREFIX)m5.UEIP','1')")
+# # Define the crystal locations
+# doAfterIocInit("dbpf('$(PREFIX)SiPosition','27.5')")
+# doAfterIocInit("dbpf('$(PREFIX)SiCPosition','1.0')")
+# # doAfterIocInit("dbpf('$(PREFIX)SiPosition.DISP','1')") # disable put
+# # doAfterIocInit("dbpf('$(PREFIX)SiCPosition.DISP','1')")

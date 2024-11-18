@@ -14,13 +14,13 @@ ioc4idVDCMLinux_registerRecordDeviceDriver(pdbbase)
 < settings.iocsh
 < common.iocsh
 
-# Setup ACS motors for Cinel monochromator
+# Setup ACS controller and load motor records
+< iocsh/motors.iocsh
+
+# Load support and settings for Cinel monochromator
 < iocsh/monochromator.iocsh
 
-# Some extra settings for the other motors
-< iocsh/motors_extras.iocsh
-
-# Slits
+# White beam slits (VMAS)
 < iocsh/slits.iocsh
 
 # Allstop, alldone
