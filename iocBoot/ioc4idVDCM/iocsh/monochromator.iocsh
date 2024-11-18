@@ -56,7 +56,8 @@
 ######################################################################
 
 # Load ACS support, it is build as a standalone module
-iocshLoad("$(MOTOR_ACSMOTION)/iocsh/ACS_Motion_tcp.iocsh", "INSTANCE=ACS1,IP_ADDR=164.54.115.16,NUM_AXES=16,IDLE_POLL=0.2,MOVING_POLL=0.05")
+# iocshLoad("$(MOTOR_ACSMOTION)/iocsh/ACS_Motion_tcp.iocsh", "INSTANCE=ACS1,IP_ADDR=164.54.115.16,NUM_AXES=16,IDLE_POLL=0.2,MOVING_POLL=0.05")
+iocshLoad("$(MOTOR_ACSMOTION)/iocsh/ACS_Motion_tcp.iocsh", "INSTANCE=ACS1,IP_ADDR=10.54.115.16,NUM_AXES=16,IDLE_POLL=0.2,MOVING_POLL=0.01")
 
 # Load motor records
 dbLoadTemplate("substitutions/AcsMotion_mono.substitutions","P=$(PREFIX)")
@@ -81,7 +82,7 @@ doAfterIocInit('dbpf("$(PREFIX)Kohzu_yOffsetAO", "15.7")')
 doAfterIocInit("dbpf('$(PREFIX)m1.ERES','-5.72957795e-07')") # ERES=EFAC*conversion factor
 doAfterIocInit("dbpf('$(PREFIX)m1.OFF','101.26886969629788')") # to match dial indicator
 doAfterIocInit("dbpf('$(PREFIX)m1.FOFF','1')") # frozen offset
-doAfterIocInit("dbpf('$(PREFIX)m1.MDEL','0.0001')") # increase monitor deadband
+# doAfterIocInit("dbpf('$(PREFIX)m1.MDEL','0.00001')") # increase monitor deadband
 doAfterIocInit("dbpf('$(PREFIX)m1.VMAX','0.4')") # max velocity deg/s
 
 ## Crystal Selection ##
@@ -91,12 +92,12 @@ doAfterIocInit("dbpf('$(PREFIX)m2.FOFF','1')") # frozen offset
 doAfterIocInit("dbpf('$(PREFIX)m2.VMAX','1.0')") # max velocity mm/s
 
 ## Crystal Gap ##
-doAfterIocInit("dbpf('$(PREFIX)m3.ERES','0.00005')") # ERES = EFAC
-doAfterIocInit("dbpf('$(PREFIX)m3.OFF','-27.209')")
-doAfterIocInit("dbpf('$(PREFIX)m3.FOFF','1')") # frozen offset
-doAfterIocInit("dbpf('$(PREFIX)m3.VMAX','0.6')") # max velocity mm/s
-doAfterIocInit("dbpf('$(PREFIX)m3.HLM','26.8')")
-doAfterIocInit("dbpf('$(PREFIX)m3.LLM','8.2')")
+# doAfterIocInit("dbpf('$(PREFIX)m3.ERES','0.00005')") # ERES = EFAC
+# doAfterIocInit("dbpf('$(PREFIX)m3.OFF','-27.209')")
+# doAfterIocInit("dbpf('$(PREFIX)m3.FOFF','1')") # frozen offset
+# doAfterIocInit("dbpf('$(PREFIX)m3.VMAX','0.6')") # max velocity mm/s
+# doAfterIocInit("dbpf('$(PREFIX)m3.HLM','26.8')")
+# doAfterIocInit("dbpf('$(PREFIX)m3.LLM','8.2')")
 
 ## Course Pitch ## 
 doAfterIocInit("dbpf('$(PREFIX)m4.ERES','3.9184953e-6')") # converted to mrad
@@ -128,8 +129,8 @@ doAfterIocInit("dbpf('$(PREFIX)SiPosition.DISP','1')") # disable put
 doAfterIocInit("dbpf('$(PREFIX)SiCPosition.DISP','1')")
 
 # Set use enable = YES
-doAfterIocInit("dbpf('$(PREFIX)m1.CNEN','1')")
-doAfterIocInit("dbpf('$(PREFIX)m2.CNEN','1')")
-doAfterIocInit("dbpf('$(PREFIX)m3.CNEN','1')")
-doAfterIocInit("dbpf('$(PREFIX)m4.CNEN','1')")
-doAfterIocInit("dbpf('$(PREFIX)m5.CNEN','1')")
+# doAfterIocInit("dbpf('$(PREFIX)m1.CNEN','1')")
+# doAfterIocInit("dbpf('$(PREFIX)m2.CNEN','1')")
+# doAfterIocInit("dbpf('$(PREFIX)m3.CNEN','1')")
+# doAfterIocInit("dbpf('$(PREFIX)m4.CNEN','1')")
+# doAfterIocInit("dbpf('$(PREFIX)m5.CNEN','1')")
